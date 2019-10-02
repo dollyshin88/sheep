@@ -1,11 +1,13 @@
-import * as THREE from 'three';
-import Example from './meadowObjects/example';
+import * as Three from 'three';
+import Skybox from './meadowObjects/skybox';
 import Lighting from './meadowObjects/lighting';
-
+import Plane from './meadowObjects/plane';
+// import Tree from './meadowObjects/tree';
+// import Sheep from './meadowObjects/sheep';
 // Meadow is the highest level component that is responsible for creating the overall scene
 // It creates scene, renderer, camera and all of the objects that should be visible on the scene
 function Meadow(canvas) {
-    const clock = new THREE.Clock();
+    const clock = new Three.Clock();
 
     const sceneDemensions = { 
         width: canvas.width,
@@ -16,18 +18,18 @@ function Meadow(canvas) {
      this.renderer = buildRender(sceneDemensions);
      this.camera = buildCamera(sceneDemensions);
     const sceneObjects = createSceneObjects(this.scene);
-    // const raycaster = new THREE.Raycaster();
-    // const mouse = new THREE.Vector2();
+    // const raycaster = new Three.Raycaster();
+    // const mouse = new Three.Vector2();
 
     function buildScene() {
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color('#fff');
+        const scene = new Three.Scene();
+        scene.background = new Three.Color('#fff');
 
         return scene; 
     }
 
     function buildRender({ width, height }) {
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        const renderer = new Three.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         const DPR = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
         renderer.setPixelRatio(DPR);
         renderer.setSize(width, height);
@@ -35,7 +37,7 @@ function Meadow(canvas) {
         renderer.gammaInput = true;
         renderer.gammaOutput = true; 
         renderer.gammaFactor = 2.2;
-        //texture.encoding = THREE.sRGBEncoding
+        //texture.encoding = Three.sRGBEncoding
         return renderer;
     }
 
@@ -43,17 +45,20 @@ function Meadow(canvas) {
         const aspectRatio = width/height;
         const fieldOfView = 55;
         const nearPlane = 1;
-        const farPlane = 1000;
-        const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-        camera.position.set(0,0,20);
+        const farPlane = 100000;
+        const camera = new Three.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+        camera.position.set(0, 500, 20000);
         return camera;
     }
 
     function createSceneObjects(scene) {
-        
+        // const sheep = new Sheep(scene);
+        // scene.add(sheep.group);
         const sceneObjects = [
-            new Example(scene),
-            new Lighting(scene)
+            // new Skybox(scene),
+            new Lighting(scene),
+            new Plane(scene)
+            // new Tree(scene),
         ];
 
         return sceneObjects;
@@ -62,10 +67,13 @@ function Meadow(canvas) {
     // Public methods
     this.update = () => {
         // const elapsedTime = clock.getElapsedTime();
+        
         for (let i = 0; i < sceneObjects.length; i++) {
+            
             sceneObjects[i].update();
             this.renderer.render(this.scene, this.camera);
         }
+        
     };
 
     this.onWindowResize = () => {

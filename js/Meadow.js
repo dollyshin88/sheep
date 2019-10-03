@@ -23,7 +23,7 @@ function Meadow(canvas) {
 
     function buildScene() {
         const scene = new Three.Scene();
-        scene.background = new Three.Color('#fff');
+        scene.background = new Three.Color('#96c7ff');
 
         return scene; 
     }
@@ -47,7 +47,7 @@ function Meadow(canvas) {
         const nearPlane = 1;
         const farPlane = 100000;
         const camera = new Three.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-        camera.position.set(0, 500, 20000);
+        camera.position.set(0, 500, 5500);
         return camera;
     }
 
@@ -57,8 +57,8 @@ function Meadow(canvas) {
         const sceneObjects = [
             // new Skybox(scene),
             new Lighting(scene),
-            new Plane(scene)
-            // new Tree(scene),
+            new Plane(scene),
+            // new Tree(scene)
         ];
 
         return sceneObjects;
@@ -71,7 +71,7 @@ function Meadow(canvas) {
         for (let i = 0; i < sceneObjects.length; i++) {
             
             sceneObjects[i].update();
-            this.renderer.render(this.scene, this.camera);
+            // this.renderer.render(this.scene, this.camera);
         }
         
     };

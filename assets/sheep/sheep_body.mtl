@@ -1,0 +1,28 @@
+newmtl Matte Iron_baa0c8c3-0438-4c50-bd84-4b4423c5771e
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\a8a92ffd-8345-4b18-bf91-d995d46cdb03.jpg
+newmtl Pure white matte_f8ccca41-86b9-481e-af5a-fb3b26fb1f50
+Kd 1.000 1.000 1.000
+d 1.000
+newmtl Oyster white matte 2_1a530e24-6f87-40c1-b983-0265b9050be1
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Blue grey matte 1_dd734fde-6ea3-4970-bfd3-5f306d1a02c6
+Kd 0.278 0.294 0.306
+d 1.000
+newmtl Oyster white matte 4_11d92043-d8bd-4d1d-a2b6-43d342f7483c
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Oyster white matte 3_9df98748-7bbd-451a-9882-2b0b5c99c0a0
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Blue grey matte_cd3d254f-e4d1-4978-89ab-861e09b6807d
+Kd 0.278 0.294 0.306
+d 1.000
+newmtl Oyster white matte_eaffd803-9c55-4935-aad5-7bfe8c9f7d50
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Object material_95d27b7f-6fb1-496d-bc18-b1a92e6d30c9
+Kd 1.000 1.000 1.000
+d 1.000

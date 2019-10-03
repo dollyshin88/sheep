@@ -6,13 +6,13 @@ const meadow = new Meadow(canvas);
 import Sky from './meadowObjects/sky';
 import Sheep from './meadowObjects/sheep';
 import Cloud from './meadowObjects/cloud';
+import Tree from './meadowObjects/tree';
 // import sheep from './meadowObjects/sheep';
-let mouseDown;
-let sheep;
+let spaceDown;
+let sheeps = []
 let sky;
-let cloud;
 let night = false;
-
+let trees;
 const toggleBtn = document.querySelector('.toggle');
 toggleBtn.addEventListener('click', toggleNight);
 
@@ -21,44 +21,67 @@ function init() {
     document.body.appendChild(meadow.renderer.domElement);
     const controls = new OrbitControls(meadow.camera, meadow.renderer.domElement);
     controls.addEventListener('change', () => meadow.renderer.render(meadow.scene, meadow.camera));
-    // controls.minDistance = 100;
-    // controls.maxDistance = 1500;
+    controls.minDistance = 500;
+    controls.maxDistance = 5700;
 
     //==================
-    document.body.onkeypress = onMouseDown;
+    document.body.onkeypress = onspaceDown;
     document.body.onkeyup = onMouseUp;
-        // document.addEventListener('mousedown', onMouseDown);
-        // document.addEventListener('mouseup', onMouseUp);
+
         document.addEventListener('touchstart', onTouchStart);
         document.addEventListener('touchend', onTouchEnd);
     //===================   
-    drawSheep();
+    drawSheep(3);
     drawSky();
     drawCloud();
+    drawTrees();
 }
+
+function drawTrees() {
+    trees = new Tree();
+    meadow.scene.add(trees.group);
+
+};
 function drawSky() {
     sky = new Sky();
     sky.showNightSky(night);
     meadow.scene.add(sky.group);
 }
 function drawCloud() {
-    cloud = new Cloud();
-    meadow.scene.add(cloud.group);
+    const cloud1 = new Cloud('cloud_type1');
+    const cloud2 = new Cloud('cloud_type2');
+    const cloud3 = new Cloud('cloud_type3');
+    const cloud4 = new Cloud('cloud_type2');
+    const cloud5 = new Cloud('cloud_type1');
+    const cloud6 = new Cloud('cloud_type3');
+    meadow.scene.add(cloud1.group);
+    meadow.scene.add(cloud2.group);
+    meadow.scene.add(cloud3.group);
+    meadow.scene.add(cloud4.group);
+    meadow.scene.add(cloud5.group);
+    meadow.scene.add(cloud6.group);
+
 }
 
-function drawSheep() {
-    sheep = new Sheep(rad);
-    // sheep.group.translateY(200);
-    meadow.scene.add(sheep.group);
+function drawSheep(num) {
+    for (let i = 0; i < num; i++) {
+        const newSheep = new Sheep();
+        sheeps.push(newSheep);
+        meadow.scene.add(newSheep.group);
+    }
+
+    // meadow.scene.add(sheep1.group);
+    // meadow.scene.add(sheep2.group);
+    // meadow.scene.add(sheep3.group);
 }
-function onMouseDown(event) {
-    if (event.keyCode === 32) mouseDown = true;
+function onspaceDown(event) {
+    if (event.keyCode === 32) spaceDown = true;
 }
 function onTouchStart(event) {
     const targetClass = event.target.classList[0];
     if (targetClass === 'toggle' || targetClass === 'toggle-music') return;
     event.preventDefault();
-    mouseDown = true;
+    spaceDown = true;
 }
 function toggleNight() {
     night = !night;
@@ -70,13 +93,13 @@ function toggleNight() {
 }
 
 function onMouseUp() {
-    mouseDown = false;
+    spaceDown = false;
 }
 function onTouchEnd(event) {
     const targetClass = event.target.classList[0];
     if (targetClass === 'toggle' || targetClass === 'toggle-music') return;
     event.preventDefault();
-    mouseDown = false;
+    spaceDown = false;
 }
 
 function rad(degrees) {
@@ -91,11 +114,11 @@ function animate() {
 
 function render() {
     meadow.update();
-    
-    sheep.jumpOnMouseDown(mouseDown);
-    if (sheep.group.position.y > 0.4) cloud.bend();
+    sheeps.forEach(sheep => sheep.walk(Math.random()*4));
+    sheeps.forEach(sheep => sheep.speedUpSpace(spaceDown));
 
     sky.moveSky();
+    meadow.renderer.render(meadow.scene, meadow.camera);
 }
 //=========================
 function bindEventListeners(){
@@ -111,10 +134,10 @@ function resizeCanvas() {
     meadow.onWindowResize();
 }
 
-
+window.scene = meadow.scene;
 init();
 animate();
-window.scene = meadow.scene;
+
 
 // window.addEventListener('click', meadow.onMouseClick);
 

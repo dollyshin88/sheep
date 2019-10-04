@@ -10,7 +10,7 @@ function Plane (scene) {
     // texture.wrapS = Three.RepeatWrapping;
     // texture.wrapT = Three.RepeatWrapping;
     // texture.repeat.set(50,50);
-    const material = new Three.MeshBasicMaterial({map: texture});
+    const material = new Three.MeshBasicMaterial({ color: 0x113614 });
     material.side = Three.DoubleSide;
     const plane = new Three.Mesh( geometry, material );
     plane.position.set(0,0,0);

@@ -2,6 +2,8 @@ import * as Three from 'three';
 import Skybox from './meadowObjects/skybox';
 import Lighting from './meadowObjects/lighting';
 import Plane from './meadowObjects/plane';
+import LeftsideMarker from './meadowObjects/leftside_marker';
+import RightsideMarker from './meadowObjects/rightside_marker';
 // import Tree from './meadowObjects/tree';
 // import Sheep from './meadowObjects/sheep';
 // Meadow is the highest level component that is responsible for creating the overall scene
@@ -47,7 +49,7 @@ function Meadow(canvas) {
         const nearPlane = 1;
         const farPlane = 100000;
         const camera = new Three.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
-        camera.position.set(0, 500, 5500);
+        // camera.position.set(0, 500, 4500);
         return camera;
     }
 
@@ -58,6 +60,9 @@ function Meadow(canvas) {
             // new Skybox(scene),
             new Lighting(scene),
             new Plane(scene),
+            new LeftsideMarker(scene),
+            new RightsideMarker(scene)
+
             // new Tree(scene)
         ];
 

@@ -3,7 +3,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 export default class Sheep {
-    constructor() {
+    constructor(cam=null) {
         this.group = new Three.Group();
         this.vAngle = 0;
 
@@ -17,7 +17,13 @@ export default class Sheep {
         this.group.rotateZ(this.zrotation);
 
         this.group.scale.set(1, 1, 1);
-        
+        // if (cam) {
+        //     cam.position.set(10,10,50);
+        //     cam.lookAt(0,0,0)
+        //     cam.rotateZ(Math.PI);
+        //     cam.rotateX(1.5708);
+        //     this.group.add(cam);
+        // }
     }
     drawBody() {
 
@@ -89,15 +95,19 @@ export default class Sheep {
     }
     walk(speed) {
         this.vAngle += speed;
-        this.group.position.y = Math.sin(this.vAngle) -10.38;
+
+        this.group.position.y = this.group.position.y + ((1/5)*Math.sin(this.vAngle));
+
+      
         const xdir = this.group.position.x * Math.cos(this.zrotation);
         const zdir = this.group.position.z * Math.sin(this.zrotation);
-        if (Math.sqrt(xdir*xdir + zdir*zdir) > 3001) {
+
+        if (Math.sqrt(this.group.position.x*this.group.position.x + this.group.position.z*this.group.position.z) > 4900) {
             // this.zrotation = this.zrotation + Math.PI/2;
-            this.group.rotateZ(this.zrotation + Math.PI / 2);
+            this.group.rotateZ(this.zrotation + Math.PI);
             this.zrotation = this.group.rotation.z;
-            this.group.position.x += 2 * speed * Math.cos(this.zrotation);
-            this.group.position.z -= 2 * speed * Math.sin(this.zrotation);
+            this.group.position.x -= 5 * speed * Math.cos(this.zrotation);
+            this.group.position.z += 5 * speed * Math.sin(this.zrotation);
             
         } else {
             this.group.position.x -= 2 * speed * Math.cos(this.zrotation);
@@ -123,6 +133,9 @@ export default class Sheep {
             if (this.group.position.y <= -10.4) return;
             this.walk(0.08);
         }
+    }
+    clickHandler(){
+        this.group.position.y += 10;
     }
 
 }

@@ -10,11 +10,11 @@ export default class Grasspatch{
 
     addGrassPatch(x, y, z) {
         const mtlLoader = new MTLLoader();
-            mtlLoader.load('../../assets/grass/grasspatch.mtl', materials => {
+            mtlLoader.load('../../assets/grass/grasschunk.mtl', materials => {
                 materials.preload();
                 const objLoader = new OBJLoader();
                 objLoader.setMaterials(materials);
-                objLoader.load('../../assets/grass/grasspatch.obj', obj => {
+                objLoader.load('../../assets/grass/grasschunk.obj', obj => {
                     // obj.rotateX(-1.5708);
                     // obj.rotateZ(yrotation);
                     // obj.scale.set(5, 5, 5);

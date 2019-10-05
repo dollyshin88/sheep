@@ -9,6 +9,7 @@ import CamSheep from './meadowObjects/camSheep';
 import Cloud from './meadowObjects/cloud';
 import Tree from './meadowObjects/tree';
 import GrassPatch from './meadowObjects/grasspatch';
+import Item from './meadowObjects/items';
 // import sheep from './meadowObjects/sheep';
 let eventKey;
 let sheeps = [];
@@ -16,11 +17,13 @@ let sheepGroups = [];
 let camSheep;
 let grassPatches = [];
 let clouds = [];
+let items = [];
+let itemGroups = [];
 let sky;
 let night = false;
 let trees;
-const toggleBtn = document.querySelector('.toggle');
-toggleBtn.addEventListener('click', toggleNight);
+// const toggleBtn = document.querySelector('.toggle');
+// toggleBtn.addEventListener('click', toggleNight);
 //===
 
 
@@ -31,7 +34,7 @@ function init() {
     const controls = new OrbitControls(meadow.camera, meadow.renderer.domElement);
     controls.addEventListener('change', () => meadow.renderer.render(meadow.scene, meadow.camera));
     controls.minDistance = 1;
-    controls.maxDistance = 8700;
+    controls.maxDistance = 10000;
 
     //==================
     document.body.onkeypress = onKeyDown;
@@ -42,12 +45,13 @@ function init() {
     // meadow.renderer.domElement.addEventListener('click', onSheepClick, true);
     
     //===================   
-    // drawSheep(10);
+    drawSheep(10);
     drawSky();
     drawCloud();
     drawTrees();
     drawCamSheep();
-    // drawGrassPatches();
+    drawGrassPatches(100);
+    drawItems({apple: 5, banana: 5, redMushroom: 5, yellowMushroom: 5});
 }
 
 //==============JUMPING SHEEP ON CLICK================
@@ -70,18 +74,45 @@ function onSheepClick(e) {
 }
 function sheepJumpUpHandler(obj) {
     obj.position.y += 50;
+    const audio = document.querySelector(`audio[data-key="click"]`);
+    audio.play();
     setTimeout(()=> {
         obj.position.y -= 50;
     }, 100);
 }
 
 //===============DRAWING FUNCTIONS==================//
+function drawItems(option) {
+    for (let i = 0; i < option.apple; i++) {
+        let newApple = new Item('apple')
+        items.push(newApple);
+        itemGroups.push(newApple.group)
+    }
+    for (let i = 0; i < option.banana; i++) {
+        let newBanana = new Item('banana')
+        items.push(newBanana);
+        itemGroups.push(newBanana.group)
+    }
+    for (let i = 0; i < option.redMushroom; i++) {
+        let newRedMushroom = new Item('redMushroom')
+        items.push(newRedMushroom);
+        itemGroups.push(newRedMushroom.group);
+    }
+    for (let i = 0; i < option.yellowMushroom; i++) {
+        let newYellowMushroom = new Item('yellowMushroom')
+        items.push(newYellowMushroom);
+        itemGroups.push(newYellowMushroom.group);
+    }
+    items.forEach(item => meadow.scene.add(item.group));
+    
+}
+
 function drawCamSheep() {
     camSheep = new CamSheep();
     // camera pos (front/back, height, lef/right)
     meadow.camera.position.set(110,200,0);
     meadow.camera.rotateY(Math.PI/2)
-    meadow.camera.rotateX(-Math.PI/12);
+    meadow.camera.rotateX(-Math.PI/6);
     // meadow.camera.lookAt(500,50,0);
     // meadow.camera.position.set(0,2000, 9000)
     camSheep.group.position.set(0, 0, 100);
@@ -90,12 +121,12 @@ function drawCamSheep() {
     // meadow.scene.add(meadow.camera);
     meadow.scene.add(camSheep.group);
 }
-function drawGrassPatches() {
-    for (let i = 0; i < 12; i++) {
+function drawGrassPatches(num) {
+    for (let i = 0; i < num; i++) {
         grassPatches.push(
-                new GrassPatch(Math.random()*(2000+2000)-2000, 
+                new GrassPatch(Math.random()*(3000+3000)-3000, 
                 0, 
-                Math.random()*(2000-1000)+1000)
+                Math.random()*(3000+2000)-2000)
                 );
         
     }
@@ -135,8 +166,8 @@ function drawSheep(num) {
 //==========EVENT LISTENER CALLBACKS ==============
 function onKeyDown(event) {
 
-    if (event.keyCode === 32) {
-        eventKey = 'space'
+    if (event.code === 'KeyQ') {
+        eventKey = 'bah'
         playMeh(event);
         };
     if (event.code === 'KeyW') eventKey = 'upArrow';
@@ -150,7 +181,7 @@ function onKeyUp() {
     eventKey = 'none';
 }
 function playMeh(event) {
-    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${event.code}"]`);
     audio.play();
 }
 
@@ -189,7 +220,7 @@ function render() {
     meadow.update();
     sheeps.forEach(sheep => sheep.walk(Math.random()*0.3));
     // sheeps.forEach(sheep => sheep.speedUpSpace(spaceDown));
-    camSheep.walk(eventKey);
+    camSheep.walk(eventKey, meadow.scene, sheepGroups, itemGroups);
     sky.moveSky();
     meadow.renderer.render(meadow.scene, meadow.camera);
 }

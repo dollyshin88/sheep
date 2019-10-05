@@ -9,6 +9,7 @@ export default class Sheep {
 
         this.drawBody();
         this.drawLegs();
+        this.addBox();
         const xpos = Math.random()*1000;
         const zpos = Math.random() * 2000 + 2000;
         this.zrotation = Math.random() *2*Math.PI;
@@ -24,6 +25,14 @@ export default class Sheep {
         //     cam.rotateX(1.5708);
         //     this.group.add(cam);
         // }
+    }
+    addBox() {
+        const geometryBox = new Three.BoxGeometry(110, 80, 100);
+        const materialMeshLambert = new Three.MeshLambertMaterial();
+        const box = new Three.Mesh(geometryBox, materialMeshLambert);
+        box.position.set(0,0,80);
+        box.visible = false;
+        this.group.add(box);
     }
     drawBody() {
 

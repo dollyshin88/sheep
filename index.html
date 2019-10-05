@@ -7,11 +7,20 @@
 			body { margin: 0; width: 100vw; height: 100vh; }
 			canvas { width: 100%; height: 100%; display: block;}
 		</style>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div class='toggle'>Light</div>
+		<!-- <div class='toggle'>Light</div> -->
         <canvas id='canvas'></canvas>
         <script src="./js/bundle.js"></script>
-        <audio data-key='32' src='assets/sound/sheep-bah1.wav'></audio>
+        <audio data-key='KeyQ' src='assets/sound/sheep-bah1.wav'></audio>
+		<audio data-key='click' src='assets/sound/sheep-lamb.wav'></audio>
+		
+		
+		<audio class='audio-control' controls loop controlsList="nodownload" autoplay muted='true'>  
+        	<source src='assets/sound/feeling-positive.mp3' >  
+		</audio>
+          
+    </audio> 
 	</body>
 </html>

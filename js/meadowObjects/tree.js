@@ -6,15 +6,19 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 class Tree {
     constructor() {
         this.group = new Three.Group();
-        this.addForestGroup(-100, -3500, Math.random()*Math.PI);
+        //left half
+        this.addForestGroup(-100, -4000, Math.random()*Math.PI);
         this.addForestGroup(-1000, -2000, Math.random() * Math.PI);
         this.addForestGroup(-3200, -1000, Math.random() * Math.PI);
         this.addForestGroup(-3500, 0, Math.random() * Math.PI);
         this.addForestGroup(-3500, 2000, Math.random() * Math.PI);
-
-
+        // -- front
+        this.addForestGroup(-100, 4000, Math.random()*Math.PI);
+        this.addForestGroup(200, 400, Math.random()*Math.PI);
+        // --
+        //right half
         this.addForestGroup(-3000, -3000, Math.random()*Math.PI);
-        this.addForestGroup(100, -1000, Math.random()*Math.PI);
+        this.addForestGroup(100, -3500, Math.random()*Math.PI);
         this.addForestGroup(1000, -2000, Math.random()*Math.PI);
         this.addForestGroup(3000, -2200, Math.random()*Math.PI);
         this.addForestGroup(4000, 0, Math.random()*Math.PI);

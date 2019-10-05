@@ -11,7 +11,7 @@ export default class Cloud {
         // const cloudType = ['cloud_type1', 'cloud_type2', 'cloud_type3'];
         this.cloud = this.addCloud(
             (Math.random() * (5000 - (-5000)) -5000), 
-            Math.random() * (1000 - (-3000)) -3000, 
+            Math.random() * (3000 - (-3000)) -3000, 
             type
         );
         

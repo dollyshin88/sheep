@@ -5,21 +5,111 @@
     width: 100%; 
     height: 100%
   } */
-
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 .menu {
   /* position: absolute; */
 
 }
 .audio-control {
   position: absolute;
-  top: 0;
+  top: 20px;
+  right: 20px;
   z-index: 3;
 
 }
+
 
 audio::-webkit-media-controls-panel
 {
  /* background-color: rgba(233, 245, 236, 0.1); */
  background-color: lightblue;
  
+}
+.instruction {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+.movement-control {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.key {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  margin: 2px;
+}
+.bottom-keys {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.key-letter {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.key-control {
+  margin-top: 10px;
+  margin-bottom: -12px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+}
+.cntrl-key {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+}
+
+.message-placeholder {
+  font-size: 20px;
+  color: white;
+  transition: all 2s ease-in;
+}
+.message-wrap {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30vh;
+  left: calc(100vw / 2 - 150px);
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.1);
+}
+
+.hidden {
+  display: none;
 }

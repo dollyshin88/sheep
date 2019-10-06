@@ -1,4 +1,6 @@
 import Meadow from './Meadow';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import * as Three from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 const canvas = document.getElementById('canvas');
@@ -10,6 +12,8 @@ import Cloud from './meadowObjects/cloud';
 import Tree from './meadowObjects/tree';
 import GrassPatch from './meadowObjects/grasspatch';
 import Item from './meadowObjects/items';
+import Diamond from './meadowObjects/diamond';
+
 // import sheep from './meadowObjects/sheep';
 let eventKey;
 let sheeps = [];
@@ -20,12 +24,37 @@ let clouds = [];
 let items = [];
 let itemGroups = [];
 let sky;
-let night = false;
 let trees;
+let collidables = [];
+let diamonds = [];
+let diamondGroups = [];
+let RESOURCES_LOADED = false;
+let loadingManager;
+let loadingObject = new Three.Group(); 
 // const toggleBtn = document.querySelector('.toggle');
 // toggleBtn.addEventListener('click', toggleNight);
 //===
+const mtlLoader = new MTLLoader();
+mtlLoader.load('../../assets/loading/loading.mtl', materials => {
+    materials.preload();
+    const objLoader = new OBJLoader();
+    objLoader.setMaterials(materials);
 
+    objLoader.load('../../assets/loading/loading.obj', obj => {
+        obj.position.set(0,0,0);
+        obj.scale.set(0.5,0.5,0.5);
+        obj.rotateX(Math.PI);
+        obj.rotateY(Math.PI);
+        loadingObject.add(obj);
+        loadingObject.position.set(0,0,0);
+    });
+});
+
+const loadingScreen =  {
+    scene: new Three.Scene(),
+    camera: new Three.PerspectiveCamera(55, canvas.width/canvas.height, 0.1, 1000),
+    obj: loadingObject
+};
 
 //===
 function init() {
@@ -35,6 +64,29 @@ function init() {
     controls.addEventListener('change', () => meadow.renderer.render(meadow.scene, meadow.camera));
     controls.minDistance = 1;
     controls.maxDistance = 10000;
+    //======
+    loadingScreen.obj.position.set(0,0,5);
+    loadingScreen.camera.position.set(0,0, 100);
+    // loadingScreen.camera.lookAt(loadingScreen.obj.position);
+    loadingScreen.scene.add(loadingScreen.obj);
+
+    const directLight1 = new Three.DirectionalLight(0xffd798, 0.9);
+    directLight1.castShadow = true;
+    directLight1.position.set(9.5, 50, 50);
+    loadingScreen.scene.add(directLight1);
+
+
+
+    loadingManager = new Three.LoadingManager();
+    loadingManager.onProgress = (item, loaded, total) => {
+        console.log(item, loaded, total);
+    };
+    loadingManager.onLoad = () => {
+        console.log('all resources loaded');
+        RESOURCES_LOADED = true;
+        
+        screenPrep();
+    };
 
     //==================
     document.body.onkeypress = onKeyDown;
@@ -51,9 +103,41 @@ function init() {
     drawTrees();
     drawCamSheep();
     drawGrassPatches(100);
-    drawItems({apple: 5, banana: 5, redMushroom: 5, yellowMushroom: 5});
+    drawDiamonds(5);
+    drawItems({apple: 10, banana: 10, redMushroom: 10, yellowMushroom: 10});
+    collidables = sheepGroups;
+    collidables.push(trees.group);
 }
-
+function screenPrep() {
+    const audioControl = document.getElementById('audio-control');
+    audioControl.classList.remove('hidden');
+    const msgContainer = document.getElementById('message-wrap');
+    msgContainer.classList.remove('hidden');
+    const messages = [
+        'Welcome to the Sheep\'s Meadow.', 
+        'Just relax and roam around...', 
+        'and occasionally...',
+        '"Bahhhh"',
+        'Oh and...',
+        'play some music if able.',
+        '(top right corner ^)',
+        ''];
+    message(messages);
+    function message(messages) {
+        if (messages.length === 0) {
+            const msgContainer = document.getElementById('message-wrap');
+            msgContainer.classList.add('hidden');
+            return;
+        };
+        setTimeout(() => {
+            const messagePlaceholder = document.getElementById('message');
+            messagePlaceholder.innerHTML = messages[0];
+            message(messages.slice(1));
+        }, 3000);
+    }
+    
+    
+}
 //==============JUMPING SHEEP ON CLICK================
 const raycaster = new Three.Raycaster();
 const mouse = new Three.Vector2();
@@ -84,22 +168,22 @@ function sheepJumpUpHandler(obj) {
 //===============DRAWING FUNCTIONS==================//
 function drawItems(option) {
     for (let i = 0; i < option.apple; i++) {
-        let newApple = new Item('apple')
+        let newApple = new Item('apple', loadingManager);
         items.push(newApple);
-        itemGroups.push(newApple.group)
+        itemGroups.push(newApple.group);
     }
     for (let i = 0; i < option.banana; i++) {
-        let newBanana = new Item('banana')
+        let newBanana = new Item('banana', loadingManager);
         items.push(newBanana);
-        itemGroups.push(newBanana.group)
+        itemGroups.push(newBanana.group);
     }
     for (let i = 0; i < option.redMushroom; i++) {
-        let newRedMushroom = new Item('redMushroom')
+        let newRedMushroom = new Item('redMushroom', loadingManager);
         items.push(newRedMushroom);
         itemGroups.push(newRedMushroom.group);
     }
     for (let i = 0; i < option.yellowMushroom; i++) {
-        let newYellowMushroom = new Item('yellowMushroom')
+        let newYellowMushroom = new Item('yellowMushroom', loadingManager);
         items.push(newYellowMushroom);
         itemGroups.push(newYellowMushroom.group);
     }
@@ -108,17 +192,15 @@ function drawItems(option) {
 }
 
 function drawCamSheep() {
-    camSheep = new CamSheep();
+    camSheep = new CamSheep(loadingManager);
     // camera pos (front/back, height, lef/right)
-    meadow.camera.position.set(110,200,0);
-    meadow.camera.rotateY(Math.PI/2)
-    meadow.camera.rotateX(-Math.PI/6);
-    // meadow.camera.lookAt(500,50,0);
-    // meadow.camera.position.set(0,2000, 9000)
+    meadow.camera.position.set(-20,100,10);
+    meadow.camera.rotateY(Math.PI/2);
+    // meadow.camera.rotateX(-Math.PI/6);
+
     camSheep.group.position.set(0, 0, 100);
     camSheep.group.add(meadow.camera);
-    // meadow.camera.add(camSheep.group);
-    // meadow.scene.add(meadow.camera);
+
     meadow.scene.add(camSheep.group);
 }
 function drawGrassPatches(num) {
@@ -126,7 +208,8 @@ function drawGrassPatches(num) {
         grassPatches.push(
                 new GrassPatch(Math.random()*(3000+3000)-3000, 
                 0, 
-                Math.random()*(3000+2000)-2000)
+                Math.random()*(3000+2000)-2000), 
+                loadingManager
                 );
         
     }
@@ -134,33 +217,41 @@ function drawGrassPatches(num) {
 };
 
 function drawTrees() {
-    trees = new Tree();
+    trees = new Tree(loadingManager);
     meadow.scene.add(trees.group);
 
 };
 function drawSky() {
     sky = new Sky();
-    sky.showNightSky(night);
     meadow.scene.add(sky.group);
 }
-function drawCloud() {
-    clouds.push(new Cloud('cloud_type1'));
-    clouds.push(new Cloud('cloud_type2'));
-    clouds.push(new Cloud('cloud_type3'));
-    clouds.push(new Cloud('cloud_type2'));
-    clouds.push(new Cloud('cloud_type1'));
-    clouds.push(new Cloud('cloud_type3'));
+function drawCloud(loadingManager) {
+    clouds.push(new Cloud('cloud_type1', loadingManager));
+    clouds.push(new Cloud('cloud_type2', loadingManager));
+    clouds.push(new Cloud('cloud_type3', loadingManager));
+    clouds.push(new Cloud('cloud_type2', loadingManager));
+    clouds.push(new Cloud('cloud_type1', loadingManager));
+    clouds.push(new Cloud('cloud_type3', loadingManager));
     clouds.forEach(cloud => meadow.scene.add(cloud.group));
 }
 
 function drawSheep(num) {
     for (let i = 0; i < num; i++) {
-        const newSheep = new Sheep();
+        const newSheep = new Sheep(i, loadingManager);
 
         sheeps.push(newSheep);
         sheepGroups.push(newSheep.group);
         meadow.scene.add(newSheep.group);
     }
+}
+
+function drawDiamonds(num) {
+    for (let i = 0; i < num; i++) {
+        const newDiamond = new Diamond(loadingManager);
+        diamonds.push(newDiamond);
+        diamondGroups.push(newDiamond.group);
+    }
+    diamondGroups.forEach(dia => meadow.scene.add(dia));
 }
 
 //==========EVENT LISTENER CALLBACKS ==============
@@ -174,9 +265,15 @@ function onKeyDown(event) {
     if (event.code === 'KeyD') eventKey = 'rightArrow';
     if (event.code === 'KeyS') eventKey = 'downArrow';
     if (event.code === 'KeyA') eventKey = 'leftArrow';
-
+    if (event.code === 'KeyR') {
+        eventKey = 'cam'
+        repositionCam();
+    };
 }
-
+function repositionCam() {
+    meadow.camera.position.set(-20,100,10);
+    meadow.camera.rotation.set(0, 1.5707963267948966, 0);
+}
 function onKeyUp() {
     eventKey = 'none';
 }
@@ -191,14 +288,7 @@ function onTouchStart(event) {
     event.preventDefault();
     spaceDown = true;
 }
-function toggleNight() {
-    night = !night;
 
-    // toggleBtn.classList.toggle('toggle-night');
-    // world.classList.toggle('world-night');
-
-    sky.showNightSky(night);
-}
 
 function onTouchEnd(event) {
     const targetClass = event.target.classList[0];
@@ -207,22 +297,25 @@ function onTouchEnd(event) {
     spaceDown = false;
 }
 
-function rad(degrees) {
-    return degrees * (Math.PI / 180);
-}
 
 function animate() {
+    if (RESOURCES_LOADED === false ) {
+       requestAnimationFrame(animate);
+       meadow.renderer.render(loadingScreen.scene, loadingScreen.camera);
+       return; 
+    }
     requestAnimationFrame(animate);
     render();
 }
 
 function render() {
     meadow.update();
-    sheeps.forEach(sheep => sheep.walk(Math.random()*0.3));
+    sheeps.forEach(sheep => sheep.walk(Math.random()*0.3, meadow.scene, collidables));
     // sheeps.forEach(sheep => sheep.speedUpSpace(spaceDown));
-    camSheep.walk(eventKey, meadow.scene, sheepGroups, itemGroups);
+    camSheep.walk(eventKey, meadow.scene, collidables, itemGroups);
     sky.moveSky();
     meadow.renderer.render(meadow.scene, meadow.camera);
+    diamonds.forEach(dia => dia.rotate());
 }
 //=========================
 function bindEventListeners(){

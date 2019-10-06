@@ -3,10 +3,11 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 export default class Item{
-    constructor(type) {
+    constructor(type, loadingManager) {
         this.group = new Three.Group();
         this.addItem(type);
         this.addBox();
+        this.loadingManager = loadingManager;
     }
     
     addBox() {
@@ -19,11 +20,11 @@ export default class Item{
     }
  
     addItem(type) {
-        const mtlLoader = new MTLLoader();
+        const mtlLoader = new MTLLoader(this.loadingManager);
         if (type === 'apple') {
             mtlLoader.load('../../assets/items/apple.mtl', materials => {
                 materials.preload();
-                const objLoader = new OBJLoader();
+                const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
                 objLoader.load('../../assets/items/apple.obj', obj => {
 
@@ -37,7 +38,7 @@ export default class Item{
         if (type === 'banana') {
             mtlLoader.load('../../assets/items/banana.mtl', materials => {
                 materials.preload();
-                const objLoader = new OBJLoader();
+                const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
                 objLoader.load('../../assets/items/banana.obj', obj => {
 
@@ -51,7 +52,7 @@ export default class Item{
         if (type === 'redMushroom') {
             mtlLoader.load('../../assets/items/red_mushroom.mtl', materials => {
                 materials.preload();
-                const objLoader = new OBJLoader();
+                const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
                 objLoader.load('../../assets/items/red_mushroom.obj', obj => {
 
@@ -65,7 +66,7 @@ export default class Item{
         if (type === 'yellowMushroom') {
             mtlLoader.load('../../assets/items/yellow_mushroom.mtl', materials => {
                 materials.preload();
-                const objLoader = new OBJLoader();
+                const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
                 objLoader.load('../../assets/items/yellow_mushroom.obj', obj => {
 

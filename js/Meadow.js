@@ -1,5 +1,4 @@
 import * as Three from 'three';
-import Skybox from './meadowObjects/skybox';
 import Lighting from './meadowObjects/lighting';
 import Plane from './meadowObjects/plane';
 import LeftsideMarker from './meadowObjects/leftside_marker';
@@ -57,7 +56,6 @@ function Meadow(canvas) {
         // const sheep = new Sheep(scene);
         // scene.add(sheep.group);
         const sceneObjects = [
-            // new Skybox(scene),
             new Lighting(scene),
             new Plane(scene),
             new LeftsideMarker(scene),

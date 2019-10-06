@@ -4,8 +4,9 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 
 class Tree {
-    constructor() {
+    constructor(loadingManager) {
         this.group = new Three.Group();
+        this.loadingManager = loadingManager;
         //left half
         this.addForestGroup(-100, -4000, Math.random()*Math.PI);
         this.addForestGroup(-1000, -2000, Math.random() * Math.PI);
@@ -27,10 +28,10 @@ class Tree {
     }
     
     addForestGroup(xoffset, zoffset, yrotation) {
-        const mtlLoader = new MTLLoader();
+        const mtlLoader = new MTLLoader(this.loadingManager);
         mtlLoader.load('../../assets/forest_bunch.mtl', materials => {
             materials.preload();
-            const objLoader = new OBJLoader();
+            const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
             objLoader.load('../../assets/forest_bunch.obj', obj => {
                 obj.rotateX(-1.5708);
@@ -41,14 +42,6 @@ class Tree {
             });
         });
     }
-    
-   
-    // //cube object for testing ================
-    // // const geometryBox = new Three.BoxGeometry(1000,1000,1000);
-    // // const materialMeshLambert = new Three.MeshLambertMaterial( { color: 0xFF6633 });
-    // // const tree = new Three.Mesh(geometryBox, materialMeshLambert);
-    // // tree.position.set(0,-2000,0);
-    // // scene.add(tree);
-    // //========================================
+
 }
 export default Tree;

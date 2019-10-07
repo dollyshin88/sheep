@@ -22,11 +22,11 @@ export default class Item{
     addItem(type) {
         const mtlLoader = new MTLLoader(this.loadingManager);
         if (type === 'apple') {
-            mtlLoader.load('../../assets/items/apple.mtl', materials => {
+            mtlLoader.load('assets/items/apple.mtl', materials => {
                 materials.preload();
                 const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
-                objLoader.load('../../assets/items/apple.obj', obj => {
+                objLoader.load('assets/items/apple.obj', obj => {
 
                     obj.position.set(Math.random()*(3000+3000)-3000, 0, Math.random()*(3000+2000)-2000);
                     obj.scale.set(0.5, 0.5, 0.5);
@@ -36,11 +36,11 @@ export default class Item{
         }
 
         if (type === 'banana') {
-            mtlLoader.load('../../assets/items/banana.mtl', materials => {
+            mtlLoader.load('assets/items/banana.mtl', materials => {
                 materials.preload();
                 const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
-                objLoader.load('../../assets/items/banana.obj', obj => {
+                objLoader.load('assets/items/banana.obj', obj => {
 
                     obj.position.set(Math.random()*(3000+3000)-3000, 0, Math.random()*(3000+2000)-2000);
                     obj.scale.set(0.5, 0.5, 0.5);
@@ -50,11 +50,11 @@ export default class Item{
         }
 
         if (type === 'redMushroom') {
-            mtlLoader.load('../../assets/items/red_mushroom.mtl', materials => {
+            mtlLoader.load('assets/items/red_mushroom.mtl', materials => {
                 materials.preload();
                 const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
-                objLoader.load('../../assets/items/red_mushroom.obj', obj => {
+                objLoader.load('assets/items/red_mushroom.obj', obj => {
 
                     obj.position.set(Math.random()*(3000+3000)-3000, 0, Math.random()*(3000+2000)-2000);
                     obj.scale.set(0.5, 0.5, 0.5);
@@ -64,11 +64,11 @@ export default class Item{
         }
 
         if (type === 'yellowMushroom') {
-            mtlLoader.load('../../assets/items/yellow_mushroom.mtl', materials => {
+            mtlLoader.load('assets/items/yellow_mushroom.mtl', materials => {
                 materials.preload();
                 const objLoader = new OBJLoader(this.loadingManager);
                 objLoader.setMaterials(materials);
-                objLoader.load('../../assets/items/yellow_mushroom.obj', obj => {
+                objLoader.load('assets/items/yellow_mushroom.obj', obj => {
 
                     obj.position.set(Math.random()*(3000+3000)-3000, 0, Math.random()*(3000+2000)-2000);
                     obj.scale.set(0.7, 0.7, 0.7);

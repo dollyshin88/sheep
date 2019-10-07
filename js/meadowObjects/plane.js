@@ -6,7 +6,11 @@ function Plane (scene) {
     // const mat = new Three.TextureLoader().load('../../assets/grassplane.jpg',          texture => {
     //         const material = new Three.MeshBasicMaterial( { map: texture });
     //     });
+<<<<<<< HEAD
     const texture = new Three.TextureLoader().load('assets/grassplane.jpg');
+=======
+    // const texture = new Three.TextureLoader().load('assets/grassplane.jpg');
+>>>>>>> gh-pages
     // texture.wrapS = Three.RepeatWrapping;
     // texture.wrapT = Three.RepeatWrapping;
     // texture.repeat.set(50,50);

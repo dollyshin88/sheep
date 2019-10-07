@@ -14,11 +14,11 @@ class Diamond {
 
     addDiamond() {
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load('../../assets/diamond/diamond.mtl', materials => {
+        mtlLoader.load('assets/diamond/diamond.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
-            objLoader.load('../../assets/diamond/diamond.obj', obj => {
+            objLoader.load('assets/diamond/diamond.obj', obj => {
                 obj.position.set(0,0,0);
                 this.group.add(obj);
             });

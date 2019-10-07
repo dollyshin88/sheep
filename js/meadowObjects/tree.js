@@ -29,11 +29,11 @@ class Tree {
     
     addForestGroup(xoffset, zoffset, yrotation) {
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load('../../assets/forest_bunch.mtl', materials => {
+        mtlLoader.load('assets/forest_bunch.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
-            objLoader.load('../../assets/forest_bunch.obj', obj => {
+            objLoader.load('assets/forest_bunch.obj', obj => {
                 obj.rotateX(-1.5708);
                 obj.rotateZ(yrotation);
                 obj.scale.set(5, 5, 5);

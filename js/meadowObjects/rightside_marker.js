@@ -14,11 +14,11 @@ export default class RightsideMarker {
     
     addMarker() {
         const mtlLoader = new MTLLoader();
-        mtlLoader.load('../../assets/decals/rightside_shape.mtl', materials => {
+        mtlLoader.load('assets/decals/rightside_shape.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader();
             objLoader.setMaterials(materials);
-            objLoader.load('../../assets/decals/rightside_shape.obj', obj => {
+            objLoader.load('assets/decals/rightside_shape.obj', obj => {
                 this.group.add(obj);
             });
         });

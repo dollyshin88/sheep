@@ -16,11 +16,11 @@ export default class Cloud {
     }
     addCamSheep() {
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load(`../../assets/sheep/camSheep.mtl`, materials => {
+        mtlLoader.load(`assets/sheep/camSheep.mtl`, materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
-            objLoader.load(`../../assets/sheep/camSheep.obj`, obj => {
+            objLoader.load(`assets/sheep/camSheep.obj`, obj => {
                 
                 this.group.add(obj);
             });

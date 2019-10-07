@@ -34,12 +34,12 @@ export default class Sheep {
     drawBody() {
 
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load('../../assets/sheep/sheep_body.mtl', materials => {
+        mtlLoader.load('assets/sheep/sheep_body.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('../../assets/sheep/sheep_body.obj', obj => {                
+            objLoader.load('assets/sheep/sheep_body.obj', obj => {                
                 this.group.add(obj);
             });
         });
@@ -48,12 +48,12 @@ export default class Sheep {
     drawLegs() {
         const mtlLoader = new MTLLoader(this.loadingManager);
         // FRONT RIGHT LEG
-        mtlLoader.load('../../assets/sheep/sheep_leg_right_front.mtl', materials => {
+        mtlLoader.load('assets/sheep/sheep_leg_right_front.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('../../assets/sheep/sheep_leg_right_front.obj', obj => {
+            objLoader.load('assets/sheep/sheep_leg_right_front.obj', obj => {
                 this.frontRightLeg = obj;
                 this.frontRightLeg.position.set(0.7, -0.8, 0.5);
                 // this.frontRightLeg.translateY(-50);
@@ -61,24 +61,24 @@ export default class Sheep {
             });
         });
         // FRONT LEFT LEG
-        mtlLoader.load('../../assets/sheep/front_left_leg_test.mtl', materials => {
+        mtlLoader.load('assets/sheep/front_left_leg_test.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('../../assets/sheep/front_left_leg_test.obj', obj => {
+            objLoader.load('assets/sheep/front_left_leg_test.obj', obj => {
                 this.frontLeftLeg = obj;
                 this.frontLeftLeg.position.set(0.7, 0.8, 0.5);
                 this.group.add(this.frontLeftLeg);
             });
         });
         // BACK RIGHT LEG   
-        mtlLoader.load('../../assets/sheep/sheep_leg_right_back.mtl', materials => {
+        mtlLoader.load('assets/sheep/sheep_leg_right_back.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('../../assets/sheep/sheep_leg_right_back.obj', obj => {
+            objLoader.load('assets/sheep/sheep_leg_right_back.obj', obj => {
                 
                 this.backRightLeg = obj;
                 this.backRightLeg.position.set(0.7, -0.8, -0.5);
@@ -86,12 +86,12 @@ export default class Sheep {
             });
         });
         // BACK LEFT LEG  
-        mtlLoader.load('../../assets/sheep/sheep_leg_left_back.mtl', materials => {
+        mtlLoader.load('assets/sheep/sheep_leg_left_back.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('../../assets/sheep/sheep_leg_left_back.obj', obj => {
+            objLoader.load('assets/sheep/sheep_leg_left_back.obj', obj => {
                 this.backLeftLeg = obj;
                 this.backLeftLeg.position.set(0.7, 0.8, -0.5);
                 this.group.add(this.backLeftLeg);

@@ -33,7 +33,6 @@ function Meadow(canvas) {
         renderer.gammaInput = true;
         renderer.gammaOutput = true; 
         renderer.gammaFactor = 2.2;
-        texture.encoding = Three.sRGBEncoding;
         return renderer;
     }
 

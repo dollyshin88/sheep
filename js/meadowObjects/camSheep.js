@@ -140,7 +140,7 @@ export default class Cloud {
                 //check if moving to the new position causes collision
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
-                    //if collided with a sheep, move forward
+                    //if collided with a sheep, move forward 
                     console.log('down-oof!');
                     this.walkForwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
@@ -162,7 +162,7 @@ export default class Cloud {
                 //check if moving to the new position causes collision
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
-                    //if collided with a sheep, stay put
+                    //if collided with a sheep, move back
                     console.log('none - oof!');
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 

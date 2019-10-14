@@ -1,6 +1,6 @@
 # Sheep
 
-Need a little break from staring at endless lines of code? Tired from coding away all day? Relax and Mehhh is designed for developers \(or any hard-working individuals\) to take a few minutes of mental break. The lush green backdrop and goofy, meandering flock of sheep will help you find a momentary peace and bring down the speed of the busy day a notch. 
+Need a little break from staring at endless lines of code? Tired from coding away all day? Sheep is designed for developers \(or any hard-working individuals\) to take a few minutes of mental break. The lush green backdrop and goofy, meandering flock of sheep will help you find a momentary peace and bring down the speed of the busy day a notch. 
 
 [Go Play Now!](https://dollyshin88.github.io/sheep/)
 

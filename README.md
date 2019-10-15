@@ -18,7 +18,7 @@ Need a little break from staring at endless lines of code? Tired from coding awa
     * If the collided object is a food item, the item is consumed \(no longer visible on the screen\).
     * In order to make the collision detection more sensitive \(cast more rays in varying directions\), Icosahedron geometry is used around the sheep rather than a simple cube geometry.
     <br>
-    <img src="assets/readme_img/sheep_apple_eating.gif" align="center" />
+    <img src="assets/readme_img/sheep_apple_eating_400.gif" align="center" />
     <br>
     <img src="assets/readme_img/sheep_collision_blocking.gif" align="center" />
     <br>

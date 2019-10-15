@@ -300,11 +300,11 @@ function animate() {
 
 function render() {
     meadow.update();
+    meadow.renderer.render(meadow.scene, meadow.camera);
     sheeps.forEach(sheep => sheep.walk(Math.random()*0.3, meadow.scene, collidables));
     // sheeps.forEach(sheep => sheep.speedUpSpace(spaceDown));
     camSheep.walk(eventKey, meadow.scene, collidables, itemGroups);
     sky.moveSky();
-    meadow.renderer.render(meadow.scene, meadow.camera);
     diamonds.forEach(dia => dia.rotate());
 }
 

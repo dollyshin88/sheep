@@ -63,12 +63,43 @@ audio::-webkit-media-controls-panel
   justify-content: center;
   align-items: center;
 }
-.key-letter {
-  text-transform: uppercase;
-  font-size: 14px;
+
+.key-arrow-up {
+  margin: -10px 0 5px 0;  
+  border-bottom: 8px solid white;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
+}
+.row-key {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.key-arrow-bottom {
+  margin: 5px 0 -21px 0;  
+  border-top: 8px solid white;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+.key-arrow-right {
+  margin: 0 -10px 0 5px;
+  border-left: 8px solid white;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid transparent;
+}
+.key-arrow-left {
+  margin: 0 5px 0 -10px;
+  border-right: 8px solid white;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
 }
 .key-control {
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: -12px;
 
   display: flex;
@@ -87,8 +118,8 @@ audio::-webkit-media-controls-panel
   border: 1px solid white;
   border-radius: 5px;
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin: 5px;
 }
 

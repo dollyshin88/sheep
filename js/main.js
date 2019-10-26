@@ -62,7 +62,27 @@ function init() {
     controls.addEventListener('change', () => meadow.renderer.render(meadow.scene, meadow.camera));
     controls.minDistance = 1;
     controls.maxDistance = 10000;
-    
+    controls.keys = {
+        LEFT: 65, //left arrow
+        UP: 87, // up arrow
+        RIGHT: 68, // right arrow
+        BOTTOM: 83 // down arrow
+    }
+    // controls.mouseButtons = {
+    //     LEFT: null,
+    //     MIDDLE: null,
+    //     RIGHT: null
+    // }
+    // controls.touches = {
+    //     ONE: null,
+    //     TWO: null
+    // }
+    controls.enablePan = false;
+    controls.enableRotate = false;
+    controls.enableZoom = false;
+    //for testing only
+    window.controls = controls;
+
     //======loading screen======//
     loadingScreen.obj.position.set(0,0,5);
     loadingScreen.camera.position.set(0,0,100);
@@ -84,7 +104,7 @@ function init() {
         };
 
     //=======event listeners=======//
-    document.body.onkeypress = onKeyDown;
+    document.body.onkeydown = onKeyDown;
     document.body.onkeyup = onKeyUp;
     document.addEventListener('mousedown', onSheepClick);
     
@@ -113,8 +133,7 @@ function screenPrep() {
         'and occasionally...',
         '"Bahhhh"',
         'Oh and...',
-        'play some music if able.',
-        '(top right corner ^)',
+        'unmute the music for more fun.',
         ''];
     message(messages);
     function message(messages) {
@@ -184,10 +203,12 @@ function drawItems(option) {
 
 function drawCamSheep() {
     camSheep = new CamSheep(loadingManager);
-    meadow.camera.position.set(-20,100,10);
+    meadow.camera.position.set(100,300,10);
     meadow.camera.rotateY(Math.PI/2);
-    camSheep.group.position.set(0, 0, 100);
+    meadow.camera.rotateX(-Math.PI/4);
+    camSheep.group.position.set(0, 0, 500);
     camSheep.group.add(meadow.camera);
+    camSheep.group.rotateY(Math.PI/2);
     meadow.scene.add(camSheep.group);
 }
 
@@ -246,23 +267,33 @@ function drawDiamonds(num) {
 
 //==========EVENT LISTENER CALLBACKS ==============//
 function onKeyDown(event) {
-    if (event.code === 'KeyQ') {
+    if (event.code === 'KeyB') {
         eventKey = 'bah'
         playMeh(event);
         };
-    if (event.code === 'KeyW') eventKey = 'upArrow';
-    if (event.code === 'KeyD') eventKey = 'rightArrow';
-    if (event.code === 'KeyS') eventKey = 'downArrow';
-    if (event.code === 'KeyA') eventKey = 'leftArrow';
-    if (event.code === 'KeyR') {
+    if (event.keyCode === 38) eventKey = 'upArrow';
+    if (event.keyCode === 39) eventKey = 'rightArrow';
+    if (event.keyCode === 40) eventKey = 'downArrow';
+    if (event.keyCode === 37) eventKey = 'leftArrow';
+    if (event.code === 'KeyC') {
         eventKey = 'cam'
-        repositionCam();
+        repositionCam('topView');
+    };
+    if (event.code === 'KeyV') {
+        eventKey = 'cam'
+        repositionCam('groundView');
     };
 }
 
-function repositionCam() {
-    meadow.camera.position.set(-20,100,10);
-    meadow.camera.rotation.set(0, 1.5707963267948966, 0);
+function repositionCam(viewType) {
+    if (viewType === 'topView') {
+        meadow.camera.position.set(-60,70,10);
+        meadow.camera.rotation.set(0, 1.5707963267948966, 0);
+    }
+    else if (viewType === 'groundView') {
+        meadow.camera.position.set(100,300,10);
+        meadow.camera.rotation.set(-1.5707963267948963, 0.7853981633974482, 1.5707963267948961)
+    }
 }
 
 function onKeyUp() {
@@ -312,5 +343,5 @@ init();
 animate();
 
 
-
+window.camera = meadow.camera;
 

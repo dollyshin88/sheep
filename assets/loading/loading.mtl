@@ -13,10 +13,9 @@ d 1.000
 newmtl Black Rounded Shapes 1_6a8755db-261c-4c7c-a1c9-939e455fc39a
 Kd 0.380 0.380 0.380
 d 1.000
-newmtl Hearts Pattern_357051bc-821e-4d83-ac16-ae925874add6
-Kd 1.000 1.000 1.000
+newmtl Jet black matte_a3372d1d-331c-4ea9-83a9-c8ea00f2ac5a
+Kd 0.039 0.039 0.039
 d 1.000
-map_Kd .\b88c0486-0cbf-48c2-9f90-05aef01500cd.jpg
 newmtl Organic Shapes Pink Noise_918a34f2-243e-4d8f-88d7-9f99937127c6
 Kd 0.749 0.561 0.561
 d 1.000

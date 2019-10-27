@@ -16,11 +16,11 @@ export default class Cloud {
     }
     addCamSheep() {
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load(`assets/sheep/camSheep.mtl`, materials => {
+        mtlLoader.load(`assets/sheep/camSheep_simple.mtl`, materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
-            objLoader.load(`assets/sheep/camSheep.obj`, obj => {
+            objLoader.load(`assets/sheep/camSheep_simple.obj`, obj => {
                 
                 this.group.add(obj);
             });
@@ -39,39 +39,39 @@ export default class Cloud {
 
     walkForwardHelper(xrotation, yrotation) {
         if (xrotation < 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.tan(this.group.rotation.y);
-            this.group.position.z += 5 * Math.tan(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.tan(this.group.rotation.y);
+            this.group.position.z += 7 * Math.tan(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation > 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         }
     }
 
     walkBackwardHelper(xrotation, yrotation) {
         if (xrotation < 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.tan(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.tan(this.group.rotation.y);
+            this.group.position.x += 7 * Math.tan(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.tan(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation > 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         }
     }
 
@@ -118,7 +118,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, backoff
-                    console.log('up-oof!');
+                    // console.log('up-oof!');
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 if (this.collidedItem) {
@@ -126,7 +126,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('up-ooo yumm');
+                    // console.log('up-ooo yumm');
                 }
                 break;
                 
@@ -141,7 +141,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, move forward 
-                    console.log('down-oof!');
+                    // console.log('down-oof!');
                     this.walkForwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 if (this.collidedItem) {
@@ -149,7 +149,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('down-ooo yumm');
+                    // console.log('down-ooo yumm');
                 }
                 break;
             case 'leftArrow':
@@ -163,7 +163,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, move back
-                    console.log('none - oof!');
+                    // console.log('none - oof!');
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 else if (this.collidedItem) {
@@ -171,7 +171,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('none - ooo yumm');
+                    // console.log('none - ooo yumm');
                 }
                 break;
             default:

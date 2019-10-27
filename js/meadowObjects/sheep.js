@@ -15,7 +15,7 @@ export default class Sheep {
         const xpos = Math.random()*(2000-1000)+1000;
         const zpos = Math.random() * 2000 + 2000;
         this.zrotation = Math.random() *2*Math.PI;
-        this.group.position.set(xpos,-10,zpos);
+        this.group.position.set(xpos,-5,zpos);
         this.group.rotateX(-1.5708);
         this.group.rotateZ(this.zrotation);
 
@@ -34,12 +34,12 @@ export default class Sheep {
     drawBody() {
 
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load('assets/sheep/sheep_body.mtl', materials => {
+        mtlLoader.load('assets/sheep/sheep_body_simple_2.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
 
-            objLoader.load('assets/sheep/sheep_body.obj', obj => {                
+            objLoader.load('assets/sheep/sheep_body_simple_2.obj', obj => {                
                 this.group.add(obj);
             });
         });

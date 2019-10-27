@@ -17,10 +17,13 @@ Need a little break from staring at endless lines of code? Tired from coding awa
     * If the collided object is another sheep or trees/rocks, the user sheep's movement is blocked. 
     * If the collided object is a food item, the item is consumed \(no longer visible on the screen\).
     * In order to make the collision detection more sensitive \(cast more rays in varying directions\), Icosahedron geometry is used around the sheep rather than a simple cube geometry.
-
+    <br>
     <img src="assets/readme_img/sheep_apple_eating.gif" align="center" />
 
+    ---
+    
     <img src="assets/readme_img/sheep_collision_blocking.gif" align="center" />
+    <br>
 
 * In order to ensure that the sheep faces the direction that it is moving in, the navigation logic accounts for the sheep's position and angle relative to the center of the plane and its own angle of rotation. 
 * The flock of sheep's roaming boundaries are set to the edge of the circular plane. They are designed to turn around 180 degrees and walk the other way once they reach the edge.

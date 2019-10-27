@@ -1,0 +1,24 @@
+newmtl Sheep Wool_be095dda-a4cb-441c-91c9-9594f1bc016d
+Kd 1.000 0.992 0.988
+d 1.000
+map_Kd .\2da82a51-b751-4a59-8ce2-d13ac7434a0b.jpg
+newmtl Matte Iron_a2237bed-864b-4b22-a57a-42c72556e437
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\4fd91701-1595-48f7-a0e4-20907e89cde4.jpg
+newmtl Pure white matte_0ecd3cc8-3516-436f-b5c3-2d2df90ccda2
+Kd 1.000 1.000 1.000
+d 1.000
+newmtl Oyster white matte 2_53a236ca-78c8-4da7-8663-535b6aec6682
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Blue grey matte 1_3c054f0a-124a-4afc-a5ca-78e2941f1c70
+Kd 0.278 0.294 0.306
+d 1.000
+newmtl Sheep Wool 1_de25fe3a-62c0-43d6-9010-fb9d9da21aea
+Kd 1.000 0.992 0.988
+d 1.000
+map_Kd .\2da82a51-b751-4a59-8ce2-d13ac7434a0b.jpg
+newmtl Blue grey matte_df223e5f-0fcb-4554-8f6a-e49b84babdea
+Kd 0.278 0.294 0.306
+d 1.000

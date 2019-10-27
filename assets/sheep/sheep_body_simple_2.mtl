@@ -1,0 +1,36 @@
+newmtl Ochre to Gray 1_9514f165-48b4-490e-8d74-a52dae2f22f2
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\0d8a83f4-2e93-47e2-9c33-7867d4fddfae.jpg
+newmtl Matte Iron_a2237bed-864b-4b22-a57a-42c72556e437
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\876e45f2-7978-4080-bf32-bbaf80d45aaf.jpg
+newmtl Pure white matte_0ecd3cc8-3516-436f-b5c3-2d2df90ccda2
+Kd 1.000 1.000 1.000
+d 1.000
+newmtl Oyster white matte 2_53a236ca-78c8-4da7-8663-535b6aec6682
+Kd 0.918 0.902 0.792
+d 1.000
+newmtl Blue grey matte 1_3c054f0a-124a-4afc-a5ca-78e2941f1c70
+Kd 0.278 0.294 0.306
+d 1.000
+newmtl Ochre to Gray_87aa5945-54c3-43e1-bad6-b5a867d24ee8
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\0d8a83f4-2e93-47e2-9c33-7867d4fddfae.jpg
+newmtl Ochre to Gray 3_ce716532-45e6-447f-a5d5-a81840a542d3
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\0d8a83f4-2e93-47e2-9c33-7867d4fddfae.jpg
+newmtl Ochre to Gray 5_490fe5ff-0cbd-4c3e-883b-a5f45a97dca5
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\0d8a83f4-2e93-47e2-9c33-7867d4fddfae.jpg
+newmtl Ochre to Gray 2_f571bb14-379a-475f-98b0-61465167d053
+Kd 1.000 1.000 1.000
+d 1.000
+map_Kd .\0d8a83f4-2e93-47e2-9c33-7867d4fddfae.jpg
+newmtl Blue grey matte_df223e5f-0fcb-4554-8f6a-e49b84babdea
+Kd 0.278 0.294 0.306
+d 1.000

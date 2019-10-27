@@ -16,11 +16,11 @@ export default class Cloud {
     }
     addCamSheep() {
         const mtlLoader = new MTLLoader(this.loadingManager);
-        mtlLoader.load(`assets/sheep/camSheep.mtl`, materials => {
+        mtlLoader.load(`assets/sheep/camSheep_simple.mtl`, materials => {
             materials.preload();
             const objLoader = new OBJLoader(this.loadingManager);
             objLoader.setMaterials(materials);
-            objLoader.load(`assets/sheep/camSheep.obj`, obj => {
+            objLoader.load(`assets/sheep/camSheep_simple.obj`, obj => {
                 
                 this.group.add(obj);
             });
@@ -39,39 +39,39 @@ export default class Cloud {
 
     walkForwardHelper(xrotation, yrotation) {
         if (xrotation < 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.tan(this.group.rotation.y);
-            this.group.position.z += 5 * Math.tan(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.tan(this.group.rotation.y);
+            this.group.position.z += 7 * Math.tan(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation > 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z += 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         }
     }
 
     walkBackwardHelper(xrotation, yrotation) {
         if (xrotation < 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.tan(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.tan(this.group.rotation.y);
+            this.group.position.x += 7 * Math.tan(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.tan(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation > 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 5 * Math.cos(this.group.rotation.y);
-            this.group.position.z -= 5 * Math.sin(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         }
     }
 

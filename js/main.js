@@ -63,20 +63,12 @@ function init() {
     controls.minDistance = 1;
     controls.maxDistance = 10000;
     controls.keys = {
-        LEFT: 65, //left arrow
-        UP: 87, // up arrow
-        RIGHT: 68, // right arrow
-        BOTTOM: 83 // down arrow
+        LEFT: 65, 
+        UP: 87, 
+        RIGHT: 68, 
+        BOTTOM: 83 
     }
-    // controls.mouseButtons = {
-    //     LEFT: null,
-    //     MIDDLE: null,
-    //     RIGHT: null
-    // }
-    // controls.touches = {
-    //     ONE: null,
-    //     TWO: null
-    // }
+
     controls.enablePan = false;
     controls.enableRotate = false;
     controls.enableZoom = false;
@@ -203,7 +195,7 @@ function drawItems(option) {
 
 function drawCamSheep() {
     camSheep = new CamSheep(loadingManager);
-    meadow.camera.position.set(100,300,10);
+    meadow.camera.position.set(100,400,10);
     meadow.camera.rotateY(Math.PI/2);
     meadow.camera.rotateX(-Math.PI/4);
     camSheep.group.position.set(0, 0, 500);
@@ -320,11 +312,14 @@ function resizeCanvas() {
 
 //==========RENDERING================//
 function animate() {
+    const instruction = document.getElementById('instruction');
     if (RESOURCES_LOADED === false ) {
        requestAnimationFrame(animate);
        meadow.renderer.render(loadingScreen.scene, loadingScreen.camera);
+       if (instruction !== null) instruction.classList.add('hidden');
        return; 
     }
+    instruction.classList.remove('hidden');
     requestAnimationFrame(animate);
     render();
 }

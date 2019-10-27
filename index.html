@@ -26,57 +26,82 @@
 		<div id='message-wrap' class='message-wrap hidden'>
 			<div id='message' class='message-placeholder'></div>
 		</div>
-		<div class='instruction'>
-			<div class='movement-control'>
-				<div class='key'>
-					<div class='key-arrow-up'></div>
-					<div class='key-text'>forward</div>
+		<div id='instruction' class='instruction minimized'>
+			<div class='instruction-btn-wrap'>
+				<p id='instruction-btn' class='instruction-section-title min-margin'>Instructions</p>
+				<div id='instruction-carat' class='carat-right'></div>
+			</div>
+			<div id='instruction-dropdown' class='instructions-expanded-section hidden'>
+				<div class='instruction-section-list'>
+					<p>- Roam around and explore</p>
+					<p>- Walk over items to eat</p>
+					<p>- Collect diamonds</p>
+					<p>- Click on other sheep</p>
+					<p>- Unmute game music for an improved experience</p>
 				</div>
-				<div class='bottom-keys'>
-					<div class='key row-key'>
-						<div class='key-arrow-left'></div>
-						<div class='key-text'>left</div>
-					</div>
-					<div class='key'>
-						<div class='key-text'>reverse</div>
-						<div class='key-arrow-bottom'></div>
-					</div>
-					<div class='key row-key'>
-						<div class='key-text'>right</div>
-						<div class='key-arrow-right'></div>
-					</div>
-				</div>
-			</div>
-			<div class='key-control'>
-				<p>Press</p>
-					<div class='cntrl-key'>
-						<div class='key-letter'>b</div>
-					</div>
-				<p>to "bahhh"</p>
-			</div>
-			<div class='key-control'>
-				<p>Press</p>
-				<div class='cntrl-key'>
-					<div class='key-letter'>c</div>
-				</div>
-				<p>for the ground view</p>
-			</div>
-			<div class='key-control'>
-				<p>Press</p>
-				<div class='cntrl-key'>
-					<div class='key-letter'>v</div>
-				</div>
-				<p>for top-down view</p>
-			</div>
-			<div class='key-control'>
-				<p>Walk over food to eat and look for diamonds</p>
-			</div>
-			<div class='key-control'>
-				<p>Click on other sheep!</p>
-			</div>
 
+				<p class='instruction-section-title'>Controls</p>
+				<div class='movement-control'>
+					<div class='key'>
+						<div class='key-arrow-up'></div>
+						<div class='key-text'>forward</div>
+					</div>
+					<div class='bottom-keys'>
+						<div class='key row-key'>
+							<div class='key-arrow-left'></div>
+							<div class='key-text'>left</div>
+						</div>
+						<div class='key'>
+							<div class='key-text'>reverse</div>
+							<div class='key-arrow-bottom'></div>
+						</div>
+						<div class='key row-key'>
+							<div class='key-text'>right</div>
+							<div class='key-arrow-right'></div>
+						</div>
+					</div>
+				</div>
+				<div class='key-control'>
+					<p>Press</p>
+						<div class='cntrl-key'>
+							<div class='key-letter'>b</div>
+						</div>
+					<p>to "bahhh"</p>
+				</div>
+				<div class='key-control'>
+					<p>Press</p>
+					<div class='cntrl-key'>
+						<div class='key-letter'>c</div>
+					</div>
+					<p>for ground view</p>
+				</div>
+				<div class='key-control'>
+					<p>Press</p>
+					<div class='cntrl-key'>
+						<div class='key-letter'>v</div>
+					</div>
+					<p>for top-down view</p>
+				</div>
+				
+				<div class='instruction-footer'>
+					<div class='footer-item'>
+						<p>Learn More on <a href='https://github.com/dollyshin88/sheep' target="_blank">GitHub</a></p>
+					</div>
+					<div class='footer-item'>
+						<p>Connect on <a href='https://www.linkedin.com/in/dollyshin88/'target="_blank">LinkedIn</a> | <a href='https://angel.co/dollyshin88' target="_blank">AngelList</a></p>
+					</div>
+				</div>
+			</div>	
 		</div>
-		
+		<script>
+			let btn = document.getElementById("instruction-btn");
+			instruction.addEventListener('click', () => {
+			  document.getElementById("instruction-dropdown").classList.toggle('hidden');
+			  document.getElementById('instruction').classList.toggle('minimized');
+			  document.getElementById('instruction-carat').classList.toggle('carat-down');
+			  btn.classList.toggle('min-margin');
+			})
+		</script>
 
     </audio> 
 	</body>

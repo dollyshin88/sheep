@@ -48,11 +48,21 @@ mtlLoader.load('assets/loading/loading.mtl', materials => {
     });
 });
 
+const geometry = new Three.CircleGeometry(50,50);
+const material = new Three.MeshLambertMaterial({ color: 0x64dbed });
+const plane = new Three.Mesh( geometry, material );
+plane.rotateX(-1.5708);
+
 const loadingScreen =  {
     scene: new Three.Scene(),
     camera: new Three.PerspectiveCamera(55, canvas.width/canvas.height, 0.1, 1000),
-    obj: loadingObject
+    obj: loadingObject,
+    floorObj: plane
 };
+function rotateLoadingObj() {
+    loadingScreen.obj.rotation.y += 0.02;
+    // loadingScreen.obj.translateX(0.3);
+}
 
 //===== INITIALIZE ======//
 function init() {
@@ -77,20 +87,25 @@ function init() {
 
     //======loading screen======//
     loadingScreen.obj.position.set(0,0,5);
-    loadingScreen.camera.position.set(0,0,100);
+    loadingScreen.camera.position.set(0,10,100);
     loadingScreen.scene.add(loadingScreen.obj);
+    loadingScreen.floorObj.position.set(0,-5,0);
+    loadingScreen.scene.add(loadingScreen.floorObj);
+
     // lighting for the loading screen
-    const directLight1 = new Three.DirectionalLight(0xffd798, 0.9);
+    const directLight1 = new Three.DirectionalLight(0xffd798, 0.8);
     directLight1.castShadow = true;
-    directLight1.position.set(9.5, 50, 50);
+    directLight1.position.set(20, 500, 10);
+    const hemisphereLight = new Three.HemisphereLight(0xffffff, 0xffffff, 0.3);
+    loadingScreen.scene.add(hemisphereLight);
     loadingScreen.scene.add(directLight1);
     // initialize loading manager and set callbacks for onProgress and onLoad
     loadingManager = new Three.LoadingManager();
         loadingManager.onProgress = (item, loaded, total) => {
-            console.log(item, loaded, total);
+            // console.log(item, loaded, total);
         };
         loadingManager.onLoad = () => {
-            console.log('all resources loaded');
+            // console.log('all resources loaded');
             RESOURCES_LOADED = true;
             screenPrep();
         };
@@ -198,7 +213,7 @@ function drawCamSheep() {
     meadow.camera.position.set(100,400,10);
     meadow.camera.rotateY(Math.PI/2);
     meadow.camera.rotateX(-Math.PI/4);
-    camSheep.group.position.set(0, 0, 500);
+    camSheep.group.position.set(0, 0, 700);
     camSheep.group.add(meadow.camera);
     camSheep.group.rotateY(Math.PI/2);
     meadow.scene.add(camSheep.group);
@@ -315,6 +330,7 @@ function animate() {
     const instruction = document.getElementById('instruction');
     if (RESOURCES_LOADED === false ) {
        requestAnimationFrame(animate);
+       rotateLoadingObj();
        meadow.renderer.render(loadingScreen.scene, loadingScreen.camera);
        if (instruction !== null) instruction.classList.add('hidden');
        return; 

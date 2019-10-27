@@ -118,7 +118,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, backoff
-                    console.log('up-oof!');
+                    // console.log('up-oof!');
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 if (this.collidedItem) {
@@ -126,7 +126,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('up-ooo yumm');
+                    // console.log('up-ooo yumm');
                 }
                 break;
                 
@@ -141,7 +141,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, move forward 
-                    console.log('down-oof!');
+                    // console.log('down-oof!');
                     this.walkForwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 if (this.collidedItem) {
@@ -149,7 +149,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('down-ooo yumm');
+                    // console.log('down-ooo yumm');
                 }
                 break;
             case 'leftArrow':
@@ -163,7 +163,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items);
                 if (this.collidedObject) {
                     //if collided with a sheep, move back
-                    console.log('none - oof!');
+                    // console.log('none - oof!');
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 else if (this.collidedItem) {
@@ -171,7 +171,7 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
-                    console.log('none - ooo yumm');
+                    // console.log('none - ooo yumm');
                 }
                 break;
             default:

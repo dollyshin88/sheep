@@ -50,6 +50,9 @@ audio::-webkit-media-controls-panel
   font-size: 1.3rem;
   margin-top: 20px;
 }
+#instruction-btn {
+  margin: 10px 0;
+}
 #instruction-btn:hover {
   cursor: pointer
 }
@@ -178,7 +181,7 @@ audio::-webkit-media-controls-panel
   align-items: center;
   position: absolute;
   top: 30vh;
-  left: calc(100vw / 2 - 150px);
+  left: calc(100vw / 2 - 200px);
   border-radius: 5px;
   background-color: rgba(0,0,0,0.1);
 }

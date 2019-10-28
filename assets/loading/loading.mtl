@@ -1,24 +1,3 @@
-newmtl Yellow materail_ef4c9821-3dff-450a-9ff7-d030b4e53d64
-Kd 0.961 0.780 0.078
-d 1.000
-newmtl Sharp Shapes Gray_f63bcb78-fb57-4a0a-b97c-19b839e00b91
-Kd 0.961 0.765 0.114
-d 1.000
-newmtl Zig Zag Shapes Green_031a7304-c69d-4d3a-afe5-87827bab4392
-Kd 0.416 0.561 0.424
-d 1.000
-newmtl Pink Rounded Shapes_a53e6695-5422-40e6-b434-296990ba21f6
-Kd 1.000 0.831 0.820
-d 1.000
-newmtl Black Rounded Shapes 1_6a8755db-261c-4c7c-a1c9-939e455fc39a
-Kd 0.380 0.380 0.380
-d 1.000
-newmtl Jet black matte_a3372d1d-331c-4ea9-83a9-c8ea00f2ac5a
-Kd 0.039 0.039 0.039
-d 1.000
-newmtl Organic Shapes Pink Noise_918a34f2-243e-4d8f-88d7-9f99937127c6
-Kd 0.749 0.561 0.561
-d 1.000
-newmtl Sharp Shapes - Sky Blue 1_2113c9d7-8c24-4187-a51e-e60bc008ebb5
-Kd 0.278 0.761 1.000
+newmtl Sharp Shapes - Blue_527b31bf-5b3d-4c70-971e-86ba1e352444
+Kd 0.204 0.369 0.510
 d 1.000

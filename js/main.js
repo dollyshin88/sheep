@@ -43,27 +43,40 @@ mtlLoader.load('assets/loading/loading.mtl', materials => {
     objLoader.load('assets/loading/loading.obj', obj => {
         obj.position.set(0,0,0);
         obj.scale.set(0.5,0.5,0.5);
-        obj.rotateX(Math.PI);
-        obj.rotateY(Math.PI);
         loadingObject.add(obj);
         loadingObject.position.set(0,0,0);
     });
 });
 
-const geometry = new Three.CircleGeometry(50,50);
-const material = new Three.MeshLambertMaterial({ color: 0x64dbed });
-const plane = new Three.Mesh( geometry, material );
-plane.rotateX(-1.5708);
+const planeGeometry = new Three.CircleGeometry(90,90);
+const planeMaterial = new Three.MeshBasicMaterial({ color: 0xffffff });
+const plane = new Three.Mesh( planeGeometry, planeMaterial );
+plane.rotateX(Math.PI/12);
+
+
+const floatGeometry = new Three.IcosahedronGeometry(0.4, 0);
+const floatMaterial = new Three.MeshStandardMaterial({
+    color: 0xff4033,
+    roughness: 1,
+    shading: Three.FlatShading
+});
+const floatMesh = new Three.Mesh(floatGeometry, floatMaterial);
+floatMesh.scale.set(5,5,5);
+floatMesh.position.set(0,0,30);
+const floatGroup = new Three.Group();
+floatGroup.add(floatMesh);
 
 const loadingScreen =  {
     scene: new Three.Scene(),
     camera: new Three.PerspectiveCamera(55, canvas.width/canvas.height, 0.1, 1000),
     obj: loadingObject,
-    floorObj: plane
+    floorObj: plane,
+    floatObj: floatGroup
 };
 function rotateLoadingObj() {
-    loadingScreen.obj.rotation.y += 0.02;
-    // loadingScreen.obj.translateX(0.3);
+    // loadingScreen.obj.rotation.y += 0.02;
+    loadingScreen.floatObj.rotation.x += 0.007;
+    loadingScreen.floatObj.rotation.y -= 0.02;
 }
 
 //===== INITIALIZE ======//
@@ -88,17 +101,22 @@ function init() {
     window.controls = controls;
 
     //======loading screen======//
+    loadingScreen.scene.background = new Three.Color('#96c7ff');
     loadingScreen.obj.position.set(0,0,5);
+    loadingScreen.floorObj.position.set(0,0,-200);
+    loadingScreen.floatObj.position.set(0,0,20);
     loadingScreen.camera.position.set(0,10,100);
     loadingScreen.scene.add(loadingScreen.obj);
-    loadingScreen.floorObj.position.set(0,-5,0);
     loadingScreen.scene.add(loadingScreen.floorObj);
+    loadingScreen.scene.add(loadingScreen.floatObj);
+
 
     // lighting for the loading screen
-    const directLight1 = new Three.DirectionalLight(0xffd798, 0.8);
+    const directLight1 = new Three.DirectionalLight(0xffd798, 0.5);
     directLight1.castShadow = true;
-    directLight1.position.set(20, 500, 10);
-    const hemisphereLight = new Three.HemisphereLight(0xffffff, 0xffffff, 0.3);
+    directLight1.position.set(0,100,300);
+    
+    const hemisphereLight = new Three.HemisphereLight(0xffe659, 0xffe659, 0.2);
     loadingScreen.scene.add(hemisphereLight);
     loadingScreen.scene.add(directLight1);
     // initialize loading manager and set callbacks for onProgress and onLoad
@@ -107,7 +125,6 @@ function init() {
             // console.log(item, loaded, total);
         };
         loadingManager.onLoad = () => {
-            // console.log('all resources loaded');
             RESOURCES_LOADED = true;
             screenPrep();
         };
@@ -335,6 +352,7 @@ function resizeCanvas() {
 //==========RENDERING================//
 function animate() {
     const instruction = document.getElementById('instruction');
+    const gameStat = document.getElementById('game-stat');
     if (RESOURCES_LOADED === false ) {
        requestAnimationFrame(animate);
        rotateLoadingObj();
@@ -343,6 +361,7 @@ function animate() {
        return; 
     }
     instruction.classList.remove('hidden');
+    gameStat.classList.remove('hidden');
     requestAnimationFrame(animate);
     render();
     updateGameStat();

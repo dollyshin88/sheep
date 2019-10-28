@@ -10,6 +10,7 @@ class GiantMushroom {
         this.addGiantMushroom();
         this.group.scale.set(10, 10, 10);
         this.group.position.set(-2000, 0, 4000);
+        this.group.rotateY(Math.PI);
     }
 
     addGiantMushroom() {

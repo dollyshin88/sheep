@@ -3,22 +3,22 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
 
-export default class RightsideMarker {
+export default class Balloon {
     constructor(scene) {
         this.group = new Three.Group();
-        this.addMarker();
-        this.group.position.set(3000, 0, 1000);
-        this.group.scale.set(5,5,5);
+        this.addBalloon();
+        this.group.position.set(2000, 0, -4000);
+        this.group.scale.set(4,4,4);
         scene.add(this.group);
     }
     
-    addMarker() {
+    addBalloon() {
         const mtlLoader = new MTLLoader();
-        mtlLoader.load('assets/decals/rightside_shape.mtl', materials => {
+        mtlLoader.load('assets/balloon/balloon.mtl', materials => {
             materials.preload();
             const objLoader = new OBJLoader();
             objLoader.setMaterials(materials);
-            objLoader.load('assets/decals/rightside_shape.obj', obj => {
+            objLoader.load('assets/balloon/balloon.obj', obj => {
                 this.group.add(obj);
             });
         });

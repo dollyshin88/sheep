@@ -1,0 +1,15 @@
+newmtl Material 1_799fbd39-826e-4a13-b803-ea277d277ea2
+Kd 0.369 0.271 0.827
+d 1.000
+newmtl Material 5_693d2dfa-1f73-4eb8-b9d6-047eaaeb3e0d
+Kd 0.761 0.761 0.761
+d 1.000
+newmtl Default material_ac3a6c36-302f-49aa-9957-26e609072654
+Kd 1.000 1.000 1.000
+d 1.000
+newmtl Material 8_3fd19d12-efa0-4d6a-a72c-6ff2099f6c3c
+Kd 0.800 0.800 0.800
+d 1.000
+newmtl Material 7_27d82fdd-82cb-439d-8224-4134a59fff00
+Kd 1.000 0.796 0.247
+d 1.000

@@ -132,7 +132,7 @@ export default class Cloud {
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items, diamonds);
                 if (this.collidedObject) {
                     //if collided with a sheep, backoff
-                    // console.log('up-oof!');
+                    this.screenMessage('oof!', 1000);
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 
                 if (this.collidedItem) {
@@ -141,13 +141,14 @@ export default class Cloud {
                     audio.play();
                     this.collidedItem.visible = false;
                     this.collectedFood += 1;
-                    // console.log('up-ooo yumm');
+                    this.screenMessage('yum', 1000);
                 }
                 if (this.collidedDiamond) {
                     const audio = document.querySelector(`audio[data-key="ping"]`);
                     audio.play();
                     this.collectedDiamonds += 1;
                     this.collectDiamond(10, this.collidedDiamond);
+                    this.screenMessage('ooo diamond', 1000);
                     
                 }
                 break;
@@ -216,5 +217,17 @@ export default class Cloud {
                 this.collectDiamond(interval-1, diamond);
             }, 0);
         }
+    }
+
+    screenMessage(message, time) {
+        const msgContainer = document.getElementById('message-wrap');
+        msgContainer.classList.remove('hidden');
+        const messagePlaceholder = document.getElementById('message');
+        messagePlaceholder.innerHTML = message;
+
+        setTimeout(() => {
+            const msgContainer = document.getElementById('message-wrap');
+            msgContainer.classList.add('hidden');
+        }, time);
     }
 }

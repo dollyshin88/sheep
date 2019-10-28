@@ -29,6 +29,7 @@ function Meadow(canvas) {
         const DPR = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
         renderer.setPixelRatio(DPR);
         renderer.setSize(width, height);
+        renderer.shadowMap.enabled = true;
 
         renderer.gammaInput = true;
         renderer.gammaOutput = true; 

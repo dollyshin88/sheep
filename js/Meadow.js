@@ -1,8 +1,9 @@
 import * as Three from 'three';
 import Lighting from './meadowObjects/lighting';
 import Plane from './meadowObjects/plane';
-import LeftsideMarker from './meadowObjects/leftside_marker';
-import RightsideMarker from './meadowObjects/rightside_marker';
+import Tent from './meadowObjects/tent';
+import Zigzag from './meadowObjects/zigzag';
+import Balloon from './meadowObjects/balloon';
 
 // Meadow is the highest level component that is responsible for creating the overall scene
 // It creates scene, renderer, and camera 
@@ -51,8 +52,9 @@ function Meadow(canvas) {
         const sceneObjects = [
             new Lighting(scene),
             new Plane(scene),
-            new LeftsideMarker(scene),
-            new RightsideMarker(scene)
+            new Tent(scene),
+            new Zigzag(scene),
+            new Balloon(scene),
         ];
         return sceneObjects;
     }

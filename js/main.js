@@ -141,7 +141,7 @@ function init() {
     drawTrees();
     drawCamSheep();
     drawGrassPatches(100);
-    drawDiamonds(5);
+    drawDiamonds(10);
     drawGiantMushroom();
     drawItems({apple: 10, banana: 10, redMushroom: 10, yellowMushroom: 10});
     collidables = sheepGroups.slice();
@@ -229,7 +229,7 @@ function drawItems(option) {
 
 function drawCamSheep() {
     camSheep = new CamSheep(loadingManager);
-    meadow.camera.position.set(100,400,10);
+    meadow.camera.position.set(100,300,10);
     meadow.camera.rotateY(Math.PI/2);
     meadow.camera.rotateX(-Math.PI/4);
     camSheep.group.position.set(0, 0, 700);
@@ -307,13 +307,17 @@ function onKeyDown(event) {
     if (event.keyCode === 40) eventKey = 'downArrow';
     if (event.keyCode === 37) eventKey = 'leftArrow';
     if (event.code === 'KeyC') {
-        eventKey = 'cam'
+        eventKey = 'cam';
         repositionCam('topView');
     };
     if (event.code === 'KeyV') {
-        eventKey = 'cam'
+        eventKey = 'cam';
         repositionCam('groundView');
     };
+    if (event.code === 'KeyX') {
+        eventKey = 'cam';
+        repositionCam('worldView');
+    }
 }
 
 function repositionCam(viewType) {
@@ -324,6 +328,10 @@ function repositionCam(viewType) {
     else if (viewType === 'groundView') {
         meadow.camera.position.set(100,300,10);
         meadow.camera.rotation.set(-1.5707963267948963, 0.7853981633974482, 1.5707963267948961)
+    } 
+    else if (viewType === 'worldView') {
+        meadow.camera.position.set(-6107.7246637464505, 3165.150975633883, 1202.0884513462656);
+        meadow.camera.rotation.set(-1.2415488664730627, -1.1263610406932345, -1.2090051070152281)
     }
 }
 

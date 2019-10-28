@@ -1,7 +1,7 @@
 import * as Three from 'three';
 
 function Plane (scene) {
-    const geometry = new Three.CircleGeometry(5000,100);
+    const geometry = new Three.CircleGeometry(5500,100);
     const material = new Three.MeshLambertMaterial({ color: 0x113614 });
     material.side = Three.DoubleSide;
     const plane = new Three.Mesh( geometry, material );

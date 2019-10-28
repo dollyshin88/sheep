@@ -12,17 +12,18 @@
 		<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
 	</head>
 	<body>
-		<!-- <div class='toggle'>Light</div> -->
         <canvas id='canvas'></canvas>
         <script src="./js/bundle.js"></script>
         <audio data-key='KeyB' src='assets/sound/sheep-bah1.wav'></audio>
 		<audio data-key='click' src='assets/sound/sheep-lamb.wav'></audio>
 		<audio data-key='chomp' src='assets/sound/chomp.wav'></audio>
+		<audio data-key='ping' src='assets/sound/retro-coin-02.wav'></audio>
 		
 		
 		<audio id='audio-control' class='audio-control hidden' controls loop controlsList="nodownload" autoplay muted='true'>  
         	<source src='assets/sound/feeling-positive.mp3' >  
 		</audio>
+
 		<div id='message-wrap' class='message-wrap hidden'>
 			<div id='message' class='message-placeholder'></div>
 		</div>
@@ -103,6 +104,10 @@
 			})
 		</script>
 
-    </audio> 
+		<div class='game-stat'>
+			<p>Diamonds: <span id='diamond-count'>0</span></p>
+			<p>Food: <span id='food-count'>0</span></p>
+		</div>
+    
 	</body>
 </html>

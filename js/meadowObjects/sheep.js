@@ -108,7 +108,7 @@ export default class Sheep {
             var directionVector = globalVertex.clone().normalize();
 
             var ray = new Three.Raycaster(
-                originPoint, directionVector, 5, 65);
+                originPoint, directionVector, 5, 60);
             const intersectsCollidables = ray.intersectObjects(collidables, true);
             // const intersectsItems = ray.intersectObjects(items, true);
             if (intersectsCollidables.length > 0) {

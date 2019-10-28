@@ -11,6 +11,7 @@ import Tree from './meadowObjects/tree';
 import GrassPatch from './meadowObjects/grasspatch';
 import Item from './meadowObjects/items';
 import Diamond from './meadowObjects/diamond';
+import GiantMushroom from './meadowObjects/giantMushroom';
 
 const canvas = document.getElementById('canvas');
 const meadow = new Meadow(canvas);
@@ -24,6 +25,7 @@ let items = [];
 let itemGroups = [];
 let sky;
 let trees;
+let giantMushroom;
 let collidables = [];
 let diamonds = [];
 let diamondGroups = [];
@@ -79,9 +81,9 @@ function init() {
         BOTTOM: 83 
     }
 
-    controls.enablePan = false;
-    controls.enableRotate = false;
-    controls.enableZoom = false;
+    // controls.enablePan = false;
+    // controls.enableRotate = false;
+    // controls.enableZoom = false;
     //for testing only
     window.controls = controls;
 
@@ -123,9 +125,11 @@ function init() {
     drawCamSheep();
     drawGrassPatches(100);
     drawDiamonds(5);
+    drawGiantMushroom();
     drawItems({apple: 10, banana: 10, redMushroom: 10, yellowMushroom: 10});
     collidables = sheepGroups.slice();
     collidables.push(trees.group);
+    collidables.push(giantMushroom.group);
 }
 
 // set up the game screen with audio controller and welcome message
@@ -139,8 +143,6 @@ function screenPrep() {
         'Just relax and roam around...', 
         'and occasionally...',
         '"Bahhhh"',
-        'Oh and...',
-        'unmute the music for more fun.',
         ''];
     message(messages);
     function message(messages) {
@@ -231,6 +233,11 @@ function drawGrassPatches(num) {
     }
     grassPatches.forEach(grass => meadow.scene.add(grass.group));
 };
+
+function drawGiantMushroom() {
+    giantMushroom = new GiantMushroom(loadingManager);
+    meadow.scene.add(giantMushroom.group);
+}
 
 function drawTrees() {
     trees = new Tree(loadingManager);
@@ -338,6 +345,7 @@ function animate() {
     instruction.classList.remove('hidden');
     requestAnimationFrame(animate);
     render();
+    updateGameStat();
 }
 
 function render() {
@@ -345,13 +353,20 @@ function render() {
     meadow.renderer.render(meadow.scene, meadow.camera);
     sheeps.forEach(sheep => sheep.walk(Math.random()*0.3, meadow.scene, collidables));
     // sheeps.forEach(sheep => sheep.speedUpSpace(spaceDown));
-    camSheep.walk(eventKey, meadow.scene, collidables, itemGroups);
-    sky.moveSky();
+    camSheep.walk(eventKey, meadow.scene, collidables, itemGroups, diamondGroups);
+    sky.moveSky(); 
     diamonds.forEach(dia => dia.rotate());
+}
+
+function updateGameStat() {
+    // debugger
+    document.getElementById('diamond-count').innerHTML =  camSheep.collectedDiamonds;
+    document.getElementById('food-count').innerHTML = camSheep.collectedFood;
 }
 
 init();
 animate();
+
 
 
 window.camera = meadow.camera;

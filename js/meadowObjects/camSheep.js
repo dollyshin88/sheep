@@ -9,11 +9,15 @@ export default class Cloud {
 
         this.collidedObject;
         this.collidedItem; 
+        this.collidedDiamond;
         this.loadingManager = loadingManager;
         this.addCamSheep();
         this.addBox();
         this.group.name = 'camSheep';
+        this.collectedDiamonds = 0;
+        this.collectedFood = 0;
     }
+
     addCamSheep() {
         const mtlLoader = new MTLLoader(this.loadingManager);
         mtlLoader.load(`assets/sheep/camSheep_simple.mtl`, materials => {
@@ -75,7 +79,7 @@ export default class Cloud {
         }
     }
 
-    collisionDetect(originPoint, scene, collidables, items){
+    collisionDetect(originPoint, scene, collidables, items, diamonds){
         let sheepbox = scene.getObjectByName('box');
         for (var vertexIndex = 0; vertexIndex < sheepbox.geometry.vertices.length; vertexIndex++){
             var localVertex = sheepbox.geometry.vertices[vertexIndex].clone();
@@ -83,9 +87,10 @@ export default class Cloud {
             var directionVector = globalVertex.clone().normalize();
 
             var ray = new Three.Raycaster(
-                originPoint, directionVector, 5, 65);
+                originPoint, directionVector, 5, 60);
             const intersectsCollidables = ray.intersectObjects(collidables, true);
             const intersectsItems = ray.intersectObjects(items, true);
+            const intersectsDiamonds = ray.intersectObjects(diamonds, true);
 
             if (intersectsCollidables.length > 0) {
                 for (let i = 0; i < collidables.length; i++) {
@@ -104,10 +109,19 @@ export default class Cloud {
                     }
                 }
             }
+
+            if (intersectsDiamonds.length > 0) {
+                for (let i = 0; i < items.length; i++) {
+                    if (intersectsDiamonds[0].object.parent.parent === diamonds[i]) {
+                    this.collidedDiamond = diamonds[i];
+                    break;
+                    }
+                }
+            }
         }
     }
-    walk(eventKey, scene, collidables, items) {
-        let originPos = { x: this.group.position.x, y: this.group.position.y, z: this.group.position.z };
+    walk(eventKey, scene, collidables, items, diamonds) {
+        
         let updatedPositionPoint;
         switch (eventKey) {
             case 'upArrow':
@@ -115,7 +129,7 @@ export default class Cloud {
                 updatedPositionPoint = new Three.Vector3(this.group.position.x, this.group.position.y, this.group.position.z);
 
                 //check if moving to the new position causes collision
-                this.collisionDetect(updatedPositionPoint, scene, collidables, items);
+                this.collisionDetect(updatedPositionPoint, scene, collidables, items, diamonds);
                 if (this.collidedObject) {
                     //if collided with a sheep, backoff
                     // console.log('up-oof!');
@@ -126,7 +140,15 @@ export default class Cloud {
                     const audio = document.querySelector(`audio[data-key="chomp"]`);
                     audio.play();
                     this.collidedItem.visible = false;
+                    this.collectedFood += 1;
                     // console.log('up-ooo yumm');
+                }
+                if (this.collidedDiamond) {
+                    const audio = document.querySelector(`audio[data-key="ping"]`);
+                    audio.play();
+                    this.collectedDiamonds += 1;
+                    this.collectDiamond(10, this.collidedDiamond);
+                    
                 }
                 break;
                 
@@ -138,7 +160,7 @@ export default class Cloud {
 
                 updatedPositionPoint = new Three.Vector3(this.group.position.x, this.group.position.y, this.group.position.z);
                 //check if moving to the new position causes collision
-                this.collisionDetect(updatedPositionPoint, scene, collidables, items);
+                this.collisionDetect(updatedPositionPoint, scene, collidables, items, diamonds);
                 if (this.collidedObject) {
                     //if collided with a sheep, move forward 
                     // console.log('down-oof!');
@@ -160,7 +182,7 @@ export default class Cloud {
                 updatedPositionPoint = new Three.Vector3(this.group.position.x, this.group.position.y, this.group.position.z);
 
                 //check if moving to the new position causes collision
-                this.collisionDetect(updatedPositionPoint, scene, collidables, items);
+                this.collisionDetect(updatedPositionPoint, scene, collidables, items, diamonds);
                 if (this.collidedObject) {
                     //if collided with a sheep, move back
                     // console.log('none - oof!');
@@ -179,6 +201,20 @@ export default class Cloud {
         }
         this.collidedItem = undefined;
         this.collidedObject = undefined;
+        this.collidedDiamond = undefined;
+    }
 
+    collectDiamond(interval, diamond) {
+        diamond.position.y = 80;
+        if (interval === 0) {
+            diamond.visible = false;
+            return;
+        } else {
+            setTimeout(() => {
+                // diamond.position.y += 5;
+                diamond.rotateY(10);
+                this.collectDiamond(interval-1, diamond);
+            }, 0);
+        }
     }
 }

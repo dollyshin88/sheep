@@ -78,9 +78,14 @@ function rotateLoadingObj() {
     loadingScreen.floatObj.rotation.x += 0.007;
     loadingScreen.floatObj.rotation.y -= 0.02;
 }
+var oldLogFunction = console.log;
 
 //===== INITIALIZE ======//
 function init() {
+
+    console.log = function(){}; 
+    
+
     bindEventListeners();
     document.body.appendChild(meadow.renderer.domElement);
     const controls = new OrbitControls(meadow.camera, meadow.renderer.domElement);
@@ -410,6 +415,7 @@ function updateGameStat() {
 
 init();
 animate();
+// console.log = oldLogFunction; 
 
 
 

@@ -23,6 +23,9 @@
 		<audio id='audio-control' class='audio-control hidden' controls loop controlsList="nodownload" autoplay muted='true'>  
         	<source src='assets/sound/feeling-positive.mp3' >  
 		</audio>
+		<script>
+			document.getElementById('audio-control').addEventListener('focus',function(){this.blur();},false);
+		</script>
 
 		<div id='message-wrap' class='message-wrap hidden'>
 			<div id='message' class='message-placeholder'></div>

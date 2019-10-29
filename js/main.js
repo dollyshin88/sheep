@@ -232,7 +232,7 @@ function drawCamSheep() {
     meadow.camera.position.set(100,300,10);
     meadow.camera.rotateY(Math.PI/2);
     meadow.camera.rotateX(-Math.PI/4);
-    camSheep.group.position.set(0, 0, 700);
+    camSheep.group.position.set(0, 0, 1500);
     camSheep.group.add(meadow.camera);
     camSheep.group.rotateY(Math.PI/2);
     meadow.scene.add(camSheep.group);
@@ -315,7 +315,15 @@ function onKeyDown(event) {
         eventKey = 'cam';
         repositionCam('groundView');
     };
+    if (event.code === 'KeyZ') {
+        eventKey = 'cam';
+        repositionCam('farSideView');
+    }
     if (event.code === 'KeyX') {
+        eventKey = 'cam';
+        repositionCam('nearSideView');
+    }
+    if (event.code === 'KeyW') {
         eventKey = 'cam';
         repositionCam('worldView');
     }
@@ -329,6 +337,14 @@ function repositionCam(viewType) {
     else if (viewType === 'groundView') {
         meadow.camera.position.set(100,300,10);
         meadow.camera.rotation.set(-1.5707963267948963, 0.7853981633974482, 1.5707963267948961)
+    } 
+    else if (viewType === 'farSideView') {
+        meadow.camera.position.set(-400.73267307829184, 74.75404350460431, 339.4189161843971);
+        meadow.camera.rotation.set(-0.022549369997028605, -0.3940568976158513, -0.008658800864356208)
+    } 
+    else if (viewType === 'nearSideView') {
+        meadow.camera.position.set(154.40471795360241, 70.44406722330014, 195.2346169511857);
+        meadow.camera.rotation.set(-0.144257764927874, 1.3115072265070515, 0.13949895855120945)
     } 
     else if (viewType === 'worldView') {
         meadow.camera.position.set(-6107.7246637464505, 3165.150975633883, 1202.0884513462656);
@@ -398,4 +414,5 @@ animate();
 
 
 window.camera = meadow.camera;
+window.camSheep = camSheep.group;
 

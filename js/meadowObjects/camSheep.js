@@ -46,8 +46,8 @@ export default class Cloud {
             this.group.position.x += 7 * Math.cos(this.group.rotation.y);
             this.group.position.z += 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x -= 7 * Math.tan(this.group.rotation.y);
-            this.group.position.z += 7 * Math.tan(this.group.rotation.y);
+            this.group.position.x += 7 * Math.cos(-this.group.rotation.y);
+            this.group.position.z -= 7 * Math.sin(-this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
             this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
             this.group.position.z += 7 * Math.sin(this.group.rotation.y);
@@ -65,8 +65,8 @@ export default class Cloud {
             this.group.position.x -= 7 * Math.cos(this.group.rotation.y);
             this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
         } else if (xrotation < 0 && yrotation >= -Math.PI/2 && yrotation < 0) {
-            this.group.position.x += 7 * Math.tan(this.group.rotation.y);
-            this.group.position.z -= 7 * Math.tan(this.group.rotation.y);
+            this.group.position.x -= 7 * Math.cos(-this.group.rotation.y);
+            this.group.position.z += 7 * Math.sin(-this.group.rotation.y);
         } else if (xrotation === 0 && yrotation >= 0 && yrotation <= Math.PI/2) {
             this.group.position.x += 7 * Math.cos(this.group.rotation.y);
             this.group.position.z -= 7 * Math.sin(this.group.rotation.y);
@@ -87,7 +87,7 @@ export default class Cloud {
             var directionVector = globalVertex.clone().normalize();
 
             var ray = new Three.Raycaster(
-                originPoint, directionVector, 5, 60);
+                originPoint, directionVector, 5, 65);
             const intersectsCollidables = ray.intersectObjects(collidables, true);
             const intersectsItems = ray.intersectObjects(items, true);
             const intersectsDiamonds = ray.intersectObjects(diamonds, true);
@@ -206,7 +206,7 @@ export default class Cloud {
     }
 
     collectDiamond(interval, diamond) {
-        diamond.position.y = 80;
+        diamond.position.y = 100;
         if (interval === 0) {
             diamond.visible = false;
             return;

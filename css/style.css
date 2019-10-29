@@ -30,25 +30,44 @@ audio::-webkit-media-controls-panel
  background-color: lightblue;
  
 }
-
+.control-group {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
 
 .instruction {
   position: absolute;
   top: 30px;
   left: 50px;
-  width: 380px;
+  width: 25vw;
+  min-width: 235px;
+  max-height: 90vh;
+  overflow-y: scroll;
   box-sizing: border-box;
   padding: 10px;
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-start;
   color: white;
-  background-color: rgba(173, 216, 230, 0.2);
+  background-color: rgba(58, 58, 58, 0.2);
   border-radius: 5px;
 }
 .instruction-section-title {
   font-size: 1.3rem;
   margin-top: 20px;
+}
+.instruction-section-subtitle {
+  font-size: 14px;
+  margin-top: 10px;
+}
+.key-group-flex-wrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 #instruction-btn {
   margin: 10px 0;
@@ -87,7 +106,6 @@ audio::-webkit-media-controls-panel
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 .key {
   display: flex;
@@ -101,6 +119,7 @@ audio::-webkit-media-controls-panel
   border-radius: 5px;
   color: white;
   margin: 2px;
+  box-sizing: border-box;
 }
 .bottom-keys {
   display: flex;
@@ -153,6 +172,7 @@ audio::-webkit-media-controls-panel
   align-items: center;
   color: white;
   font-size: 14px;
+  margin-right: 10px;
 }
 .cntrl-key {
   display: flex;
@@ -160,14 +180,26 @@ audio::-webkit-media-controls-panel
   justify-content: center;
   align-items: center;
   font-size: 12px;
+  width: 60px;
+  height: 60px;
   border: 1px solid white;
   border-radius: 5px;
   color: white;
-  width: 25px;
-  height: 25px;
-  margin: 5px;
+  margin: 2px;
+  padding: 5px;
+  box-sizing: border-box;
 }
-
+.perspective-control {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 66px;
+  font-size: 12px;
+  align-items: center;    
+}
+.perspective-control p {
+  text-align: center;
+  margin: 2px 0;
+}
 .message-placeholder {
   font-size: 20px;
   color: white;
@@ -212,6 +244,7 @@ audio::-webkit-media-controls-panel
 }
 .minimized {
   width: 200px;
+  height: 55px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -242,4 +275,8 @@ audio::-webkit-media-controls-panel
   bottom: 10px;
   right: 20px;
   padding: 20px;
+}
+
+.key-left-margin {
+  margin-left: 5px;
 }

@@ -99,11 +99,11 @@ function init() {
         BOTTOM: 83 
     }
 
-    // controls.enablePan = false;
-    // controls.enableRotate = false;
-    // controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.enableRotate = false;
+    controls.enableZoom = false;
     //for testing only
-    window.controls = controls;
+    // window.controls = controls;
 
     //======loading screen======//
     loadingScreen.scene.background = new Three.Color('#96c7ff');
@@ -415,10 +415,9 @@ function updateGameStat() {
 
 init();
 animate();
-// console.log = oldLogFunction; 
 
 
-
-window.camera = meadow.camera;
-window.camSheep = camSheep.group;
+//for testing only
+// window.camera = meadow.camera;
+// window.camSheep = camSheep.group;
 

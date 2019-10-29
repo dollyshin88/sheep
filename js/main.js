@@ -298,6 +298,7 @@ function drawDiamonds(num) {
 
 //==========EVENT LISTENER CALLBACKS ==============//
 function onKeyDown(event) {
+    event.preventDefault();
     if (event.code === 'KeyB') {
         eventKey = 'bah'
         playMeh(event);

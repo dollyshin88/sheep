@@ -33,6 +33,7 @@ let RESOURCES_LOADED = false;
 let loadingManager;
 let loadingObject = new Three.Group(); 
 
+console.log = function(){}; 
 //========= FOR LOADING SCREEN =======//
 const mtlLoader = new MTLLoader();
 mtlLoader.load('assets/loading/loading.mtl', materials => {
@@ -82,10 +83,6 @@ var oldLogFunction = console.log;
 
 //===== INITIALIZE ======//
 function init() {
-
-    console.log = function(){}; 
-    
-
     bindEventListeners();
     document.body.appendChild(meadow.renderer.domElement);
     const controls = new OrbitControls(meadow.camera, meadow.renderer.domElement);

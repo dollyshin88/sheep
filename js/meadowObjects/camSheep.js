@@ -131,7 +131,9 @@ export default class Cloud {
                 //check if moving to the new position causes collision
                 this.collisionDetect(updatedPositionPoint, scene, collidables, items, diamonds);
                 if (this.collidedObject) {
-                    //if collided with a sheep, backoff
+                    //if collided with a sheep, make sound and backoff
+                    const audio = document.querySelector(`audio[data-key="oof"]`);
+                    audio.play();
                     this.screenMessage('oof!', 1000);
                     this.walkBackwardHelper(this.group.rotation.x, this.group.rotation.y);
                 } 

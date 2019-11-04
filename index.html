@@ -24,7 +24,7 @@
         	<source src='assets/sound/feeling-positive.mp3' >  
 		</audio>
 		<script>
-			document.getElementById('audio-control').addEventListener('focus', () => (this.blur()), false);
+			document.getElementById('audio-control').addEventListener('focus', (e) => (e.target.blur()), false);
 		</script>
 
 		<div id='message-wrap' class='message-wrap hidden'>
